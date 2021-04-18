@@ -1,6 +1,6 @@
 # TeaChain 
 <br/>
-<img src="./screens/Design.png"  />
+<img src="./screens/Prototype.png"  />
 <br/>
 
 # Description

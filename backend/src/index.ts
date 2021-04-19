@@ -1,9 +1,8 @@
 import express from 'express';
-import Server from './Server';
+import bodyParser from 'body-parser';
+import serverConfig from './config';
 
 const app = express();
+app.use(bodyParser.json());
 
-const port = 8080;
-
-const server = new Server(app);
-server.start(port);
+app.listen(serverConfig.port, () => console.log('Server is listening on port:', serverConfig.port));

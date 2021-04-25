@@ -7,7 +7,7 @@ const requestLogger = (req: Request, res: Response, next: NextFunction) => {
   logger.info(NAMESPACE, `[${req.method}] | '${req.url}'\n`);
   logger.info(NAMESPACE, 'Request Data: ', req.body);
   next();
-  logger.info(NAMESPACE, `[${res.statusCode}] | [${res.socket}]`);
+  logger.info(NAMESPACE, `[${res.statusCode}]`);
 };
 
 export default requestLogger;

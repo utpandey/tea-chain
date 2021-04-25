@@ -3,10 +3,12 @@ import serverConfig from './config';
 import logger from './config/logger';
 import requestLogger from './middlewares/requestLogger';
 import authentication from './routes/authentication';
+import server from './models';
 
 const NAMESPACE = 'SERVER';
 
 const app = express();
+server();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

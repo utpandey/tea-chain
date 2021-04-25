@@ -1,20 +1,17 @@
 import { Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
 import logger from '../config/logger';
+import { ErrorMessage } from '../types/User';
 
 const NAMESPACE = 'USER VALIDATOR';
 
-interface ErrorMessage {
-  [key: string]: string,
-}
-
 const loginValidationRules = () => [
-  body('username').isEmail(),
+  body('email').isEmail(),
   body('password').isHash('md5'),
 ];
 
 const registerValidationRules = () => [
-  body('username').isEmail(),
+  body('email').isEmail(),
   body('password').isHash('md5'),
   body('type').isIn(['Producer', 'Farmer']),
 ];

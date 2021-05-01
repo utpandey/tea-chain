@@ -53,7 +53,7 @@ UserSchema.method('comparePassword', function comparePassword(password: string):
 });
 
 UserSchema.method('sendRegistrationMail', function sendRegistrationMail(): void {
-  EmailServices.sendEmail(this.email, 'Registration Link', 'Registration Email');
+  EmailServices.sendEmail(this.email, 'Registration Link', 'Registration');
 });
 
 const User = mongoose.model<IUser>('User', UserSchema);

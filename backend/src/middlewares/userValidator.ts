@@ -5,6 +5,10 @@ import { ErrorMessage } from '../types/User';
 
 const NAMESPACE = 'USER VALIDATOR';
 
+const linkValidationRules = () => [
+  body('email').isEmail(),
+];
+
 const loginValidationRules = () => [
   body('email').isEmail(),
   body('password').isHash('md5'),
@@ -30,4 +34,6 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export default { loginValidationRules, registerValidationRules, validate };
+export default {
+  linkValidationRules, loginValidationRules, registerValidationRules, validate,
+};

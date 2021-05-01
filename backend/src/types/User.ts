@@ -6,6 +6,7 @@ export interface IUser extends Document {
   type: string,
   // eslint-disable-next-line no-unused-vars
   comparePassword(password: string): Promise<Partial<IUser>>;
+  sendRegistrationMail(): void;
 }
 
 export interface UserSignup {

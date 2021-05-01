@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import EmailServices from '../services/EmailServices';
 import { IUser } from '../types/User';
 
 const UserSchema = new mongoose.Schema<IUser>({
@@ -49,6 +50,10 @@ UserSchema.method('comparePassword', function comparePassword(password: string):
       return resolve({});
     });
   });
+});
+
+UserSchema.method('sendRegistrationMail', function sendRegistrationMail(): void {
+  EmailServices.sendEmail(this.email, 'Registration Link', 'Registration Email');
 });
 
 const User = mongoose.model<IUser>('User', UserSchema);

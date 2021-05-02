@@ -20,6 +20,7 @@ const registerValidationRules = () => [
   body('type').isIn(['Producer', 'Farmer']),
 ];
 
+// eslint-disable-next-line consistent-return
 const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) return next();

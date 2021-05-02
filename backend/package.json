@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node ./build/index.js",
     "build": "tsc -p .",
+    "lint": "eslint src/**",
     "dev": "nodemon ./src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -w"
   },
   "author": "",
   "license": "MIT",
@@ -28,11 +29,15 @@
     "typescript": "^4.2.4"
   },
   "devDependencies": {
+    "@types/chai": "^4.2.17",
+    "@types/mocha": "^8.2.2",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "chai": "^4.3.4",
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.3.2",
     "nodemon": "^2.0.7"
   }
 }

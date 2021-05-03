@@ -14,8 +14,9 @@ ORDER: Base + typography > general layout + grid > page layout > components
 */
 :root {
   --color-primary-1: #EE9999;
-  --color-primary-2: #FFFFFF;
-  --color-primary-3: #D44529;
+  --color-primary-3: #29386E;
+  --color-primary-2: #D44529;
+  --color-primary-4: #F77957;
   --color-primary-dark: #BA265D;
   --color-grey-light-1: #faf9f9;
   --color-grey-light-2: #f4f2f2;
@@ -36,19 +37,11 @@ ORDER: Base + typography > general layout + grid > page layout > components
   font-style: normal; }
 
 /* reset & common styles */
-body,
-ul,
-h1,
-h2,
-h3,
-p,
-button,
-a,
-div {
+body {
   margin: 0;
   padding: 0;
   color: var(--color-grey-dark-2);
-  background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-3));
+  background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-2));
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
@@ -93,7 +86,58 @@ html {
   html {
     font-size: 95%; } }
 
-body {
-  /* background: rgb(100, 0, 123); */
-  background: radial-gradient(circle, #7E57C2 0%, #7E57C2 100%);
-  overflow: visible; }
+.container {
+  max-width: 120rem;
+  margin: 8rem auto;
+  background-color: var(--color-grey-light-4);
+  box-shadow: var(--shadow-dark);
+  min-height: 50rem;
+  border-radius: 100; }
+
+.header__cont {
+  background-color: var(--color-primary-3);
+  height: 7rem;
+  border-bottom: var(--color-grey-light-2);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+
+.header__cont__logo {
+  cursor: pointer;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 0rem 0 5rem;
+  align-items: center; }
+
+.header__cont__title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 30%; }
+
+.header__cont__title__text {
+  position: relative;
+  text-decoration: none;
+  font-weight: 400;
+  color: var(--color-primary-4);
+  transition: all .35s ease; }
+
+.header__cont__title__text::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-primary-4);
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s; }
+
+.header__cont__title__text:hover::before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1); }

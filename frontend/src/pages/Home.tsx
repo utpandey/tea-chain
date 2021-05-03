@@ -3,22 +3,23 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const homeContainerVariants = {
-  hidden: {
-    opacity:0
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      delay: 1.5, duration: 2
-    }
-  },
-  exit: {
-    x: '-100vw',
-    transition: {
-      ease: 'easeInOut'
-    }
-  }
-}
+	hidden: {
+		opacity: 0
+	},
+	visible: {
+		opacity: 1,
+		transition: {
+			delay: 1.5,
+			duration: 2
+		}
+	},
+	exit: {
+		x: '-100vw',
+		transition: {
+			ease: 'easeInOut'
+		}
+	}
+};
 
 // const buttonVariants = {
 //   hover: {
@@ -33,43 +34,21 @@ const homeContainerVariants = {
 // }
 
 const Home = () => {
-  return (
-    <motion.div className="home container"
-      variants={homeContainerVariants}
-      initial='hidden'
-      animate='visible'
-      exit='exit'
-    >
-      <div>
-        <Link to='/users'>
-          <motion.h3
-            className="home_title"
-            // whileHover={{color: 'black',scale: '0.9'}}
-          >
-            asdsadasdasssssssssssssssssssUser
-          </motion.h3>
-        </Link>
-        <Link to='/repolist'>
-          <motion.h3
-            className="home_title"
-            // whileHover={{ color: 'black', scale: '0.9' }}
-          >
-           saddddddddddddddddddddddddddddddddddddddddddddddddd Repository
-          </motion.h3>
-        </Link>
-      </div>
-      {/* <Loader /> */}
-      {/* <Link to="/base">
-        <motion.button
-          variants={buttonVariants}
-          whileHover='hover'
-        >
-          Create Your Pizza
-        </motion.button>
-      </Link> */}
-      
-    </motion.div>
-  )
-}
+	return (
+		<motion.div className="home__cont">
+		 {/* variants={homeContainerVariants}
+		 initial='hidden'
+	   animate='visible'
+		 exit='exit' */}
+			<motion.div className="home__cont__text">
+				<motion.h1 className="home__cont__text__title">TEA CHAIN</motion.h1>
+				<motion.h4 className="home__cont__text__content">
+					A blockchain platform to showcase the journey of tea leaves
+				</motion.h4>
+			</motion.div>
+			{/* <motion.img src={ }/> className="home__cont__img" */}
+		</motion.div>
+	);
+};
 
 export default Home;

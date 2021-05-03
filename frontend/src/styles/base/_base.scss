@@ -10,19 +10,11 @@
 
 /* reset & common styles */
 
-body,
-ul,
-h1,
-h2,
-h3,
-p,
-button,
-a,
-div {
+body {
     margin: 0;
     padding: 0;
     color: var(--color-grey-dark-2);
-    background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-3));
+    background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-2));
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
@@ -67,10 +59,4 @@ html {
     @include respond(big-desktop) {
         font-size: 95%; //1rem = 12, 12/16
     }
-}
-
-body {
-    /* background: rgb(100, 0, 123); */
-    background: radial-gradient(circle, #7E57C2 0%, #7E57C2 100%);
-    overflow: visible;
 }

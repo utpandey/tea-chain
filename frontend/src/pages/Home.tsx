@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
+import HomeImage from '../assets/home_img.png'
+import TeaGif from '../assets/TeaGif.gif'
 
 const homeContainerVariants = {
 	hidden: {
@@ -45,8 +47,11 @@ const Home = () => {
 				<motion.h4 className="home__cont__text__content">
 					A blockchain platform to showcase the journey of tea leaves
 				</motion.h4>
-			</motion.div>
-			{/* <motion.img src={ }/> className="home__cont__img" */}
+      </motion.div>
+      <motion.div className="home__cont__imgCont">
+        <motion.img src={TeaGif} className="home__cont__imgCont__img gif"/> 
+        <motion.img src={HomeImage} className="home__cont__imgCont__img"/>
+      </motion.div>
 		</motion.div>
 	);
 };

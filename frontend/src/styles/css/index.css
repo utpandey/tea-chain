@@ -17,7 +17,7 @@ ORDER: Base + typography > general layout + grid > page layout > components
   --color-primary-3: #29386E;
   --color-primary-2: #D44529;
   --color-primary-4: #F77957;
-  --color-primary-dark: #BA265D;
+  --color-text-: #57F7C9;
   --color-grey-light-1: #faf9f9;
   --color-grey-light-2: #f4f2f2;
   --color-grey-light-3: #f0eeee;
@@ -89,23 +89,58 @@ html {
 .container {
   max-width: 120rem;
   margin: 8rem auto;
-  background-color: var(--color-grey-light-4);
   box-shadow: var(--shadow-dark);
-  min-height: 50rem;
-  border-radius: 100; }
+  min-height: 120rem;
+  border-radius: 1rem;
+  position: relative; }
+
+.home__cont {
+  background-color: var(--color-primary-3);
+  position: absolute;
+  width: 100%; }
+
+.home__cont__text {
+  text-align: center;
+  padding: 5rem;
+  justify-content: space-between; }
+
+.home__cont__text__title {
+  color: #fff;
+  font-size: 4rem; }
+
+.home__cont__text__content {
+  color: #57F7C9;
+  font-size: 2rem;
+  width: 40%;
+  margin-left: 30%; }
+
+.home__cont__imgCont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 0 0 5rem 0; }
+
+.home__cont__imgCont__img {
+  width: 35%;
+  height: 35%; }
+
+.home__cont__imgCont .gif {
+  align-self: flex-end;
+  width: 7%; }
 
 .header__cont {
   background-color: var(--color-primary-3);
-  height: 7rem;
+  height: 10rem;
   border-bottom: var(--color-grey-light-2);
   display: flex;
   flex-direction: row;
+  border-radius: 1rem 1rem 0 0;
   justify-content: space-between; }
 
 .header__cont__logo {
   cursor: pointer;
-  width: 5rem;
-  height: 5rem;
+  width: 7rem;
+  height: 7rem;
   margin: 0 0rem 0 5rem;
   align-items: center; }
 

@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import './styles/css/index.css';
 import Header from './components/Header';
 import Home from './pages/Home';
+import Verification from './pages/Verification'
 
 const routing = (
   <Router >
@@ -34,6 +35,9 @@ const routing = (
               </Route>
               <Route path='/repo'>
                 {/* <Repository /> */}
+              </Route>
+              <Route path="/verification/:id">
+                <Verification />
               </Route>
               <Route path="/" >
                 <Home />

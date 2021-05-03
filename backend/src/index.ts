@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import serverConfig from './config';
 import logger from './config/logger';
 import requestLogger from './middlewares/requestLogger';
@@ -12,6 +13,7 @@ server();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors());
 app.use(requestLogger);
 app.use('/authentication', authentication);
 

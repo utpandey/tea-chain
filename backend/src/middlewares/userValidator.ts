@@ -5,6 +5,10 @@ import { ErrorMessage } from '../types/User';
 
 const NAMESPACE = 'USER VALIDATOR';
 
+const linkValidationRules = () => [
+  body('email').isEmail(),
+];
+
 const loginValidationRules = () => [
   body('email').isEmail(),
   body('password').isHash('md5'),
@@ -16,6 +20,7 @@ const registerValidationRules = () => [
   body('type').isIn(['Producer', 'Farmer']),
 ];
 
+// eslint-disable-next-line consistent-return
 const validate = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) return next();
@@ -30,4 +35,6 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
   });
 };
 
-export default { loginValidationRules, registerValidationRules, validate };
+export default {
+  linkValidationRules, loginValidationRules, registerValidationRules, validate,
+};

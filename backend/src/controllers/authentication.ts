@@ -1,6 +1,23 @@
 import { Request, Response } from 'express';
 import UserProfileServices from '../services/UserProfileService';
 
+const registrationMail = async (req: Request, res: Response) => {
+  try {
+    const result = await UserProfileServices.sendRegistrationLink(req.body);
+    if (result) {
+      res.status(200).json({
+        result: true,
+        message: result,
+      });
+    }
+  } catch (err) {
+    res.status(502).json({
+      result: false,
+      message: err,
+    });
+  }
+};
+
 const login = async (req: Request, res: Response) => {
   try {
     const result = await UserProfileServices.login(req.body);
@@ -54,4 +71,4 @@ const register = async (req: Request, res: Response) => {
   }
 };
 
-export default { login, register };
+export default { registrationMail, login, register };

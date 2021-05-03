@@ -2,7 +2,8 @@
     "env": {
         "browser": true,
         "commonjs": true,
-        "es2021": true
+        "es2021": true,
+        "mocha": true
     },
     "extends": [
         "airbnb-base",
@@ -16,6 +17,12 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "import/no-extraneous-dependencies": [
+            "error", 
+            {
+                "devDependencies": ["**/*.spec.ts"]
+            }
+        ],
         "import/extensions": [
             "error",
             "ignorePackages",

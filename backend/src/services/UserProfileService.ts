@@ -1,6 +1,14 @@
 import User from '../models/User';
 import { UserSignup, UserSignin } from '../types/User';
 
+const sendRegistrationLink = async (params: Partial<UserSignin>) => {
+  const result = await User.findOne({ email: params.email });
+  if (result) {
+    result.sendRegistrationMail();
+  }
+  return true;
+};
+
 const createUser = async (params: UserSignup) => {
   const result = await User.findOne({ email: params.email });
   if (result) {
@@ -8,10 +16,13 @@ const createUser = async (params: UserSignup) => {
   }
 
   return User.create(params)
-    .then((res) => ({
-      email: res.email,
-      type: res.type,
-    }))
+    .then((res) => {
+      res.sendRegistrationMail();
+      return {
+        email: res.email,
+        type: res.type,
+      };
+    })
     .catch((err) => {
       throw err;
     });
@@ -26,4 +37,4 @@ const login = async (params: UserSignin) => {
   throw new Error('User not found');
 };
 
-export default { createUser, login };
+export default { sendRegistrationLink, createUser, login };

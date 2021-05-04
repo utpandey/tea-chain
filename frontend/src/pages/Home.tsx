@@ -33,7 +33,7 @@ const homeContainerVariants = {
 const Home: React.FC = () => {
 	const t1 = gsap.timeline();
 	const images = useRef<HTMLDivElement>(null);
-	
+	const textBox = useRef<HTMLDivElement>(null);
 	const app = useRef<HTMLDivElement>(null);
 
 	const tlite = new TimelineLite()
@@ -41,6 +41,9 @@ const Home: React.FC = () => {
 	useEffect(() => {
 		console.log(app, images)
 		
+		const textbox1 = textBox.current?.children[0];
+		const textbox2 = textBox.current?.children[1];
+		// console.log(textbox)
 		// const ethText = images.current?.firstElementChild as any
 		// const ethGirl = images.current?.lastElementChild as any
 		// console.log(images.current?.lastElementChild, ethText)
@@ -55,6 +58,14 @@ const Home: React.FC = () => {
 		// 		repeat: 0 // Repeats immediately, not waiting for the other staggered animations to finish
 		// 	}
 		// })
+
+		t1.staggerFrom([textbox1, textbox2], 1, {
+			y: 14,
+			opacity: 0,
+			ease: Power3.easeOut,
+			delay: 1,
+		}, .15)
+
 		t1.from("#text-1", {
 			x: "-100%",
 			opacity: 0,
@@ -95,9 +106,9 @@ const Home: React.FC = () => {
 	return (
 		<motion.div className="home__cont" ref={app}>
 			<motion.div className="home__cont__upper">
-				<motion.div className="home__cont__upper__text">
-					<motion.h1 className="home__cont__upper__text--title">TEA CHAIN</motion.h1>
-					<motion.h4 className="home__cont__upper__text--content">
+				<motion.div className="home__cont__upper__text" ref={ textBox }>
+					<motion.h1 className="home__cont__upper__text--title" id="teaChain-title">TEA CHAIN</motion.h1>
+					<motion.h4 className="home__cont__upper__text--content" id="teaChain-cont">
 						A blockchain platform to showcase the journey of tea leaves
 					</motion.h4>
 				</motion.div>

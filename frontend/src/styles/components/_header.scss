@@ -12,6 +12,7 @@
         height: 7rem;
         margin: 0 0rem 0 5rem;
         align-items: center;
+        z-index: 999;
     }
     &__title {
         display: flex;
@@ -24,6 +25,7 @@
             position: relative;
             text-decoration: none;
             font-weight: 400;
+            font-size: 2.5rem;
             color: var(--color-primary-4);
             transition: all .35s ease;
             &::before {

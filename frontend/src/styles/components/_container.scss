@@ -1,0 +1,25 @@
+.container {
+    max-width: 150rem;
+    margin: 15rem auto;
+    // background-color: var(--color-grey-light-4);
+    box-shadow: var(--shadow-dark);
+    min-height: 240rem;
+    border-radius: 1rem;
+    position: relative;
+    @media screen and (max-width: 1440px) {
+        max-width: 120rem;
+        margin: 8rem auto;
+    }
+    @include respond(tab-land) {
+        max-width: 100rem;
+        margin: 8rem auto;
+    }
+    @include respond(tab-port) {
+        max-width: 80rem;
+        margin: 8rem auto;
+    }
+    @include respond(phone) {
+        max-width: 70rem;
+        margin: 8rem auto;
+    }
+}

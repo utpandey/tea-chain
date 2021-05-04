@@ -91,7 +91,7 @@ html {
   position: absolute;
   z-index: -1;
   width: 100%;
-  height: 60%; }
+  overflow: hidden; }
 
 @media only screen and (max-width: 75em) {
   .home__cont {
@@ -157,6 +157,9 @@ html {
 
 .home__cont__lower__about .ethGirl {
   width: 35%; }
+
+.home__cont__lower__about__text:nth-of-type(1) {
+  top: 10px; }
 
 .container {
   max-width: 150rem;
@@ -242,7 +245,8 @@ html {
   bottom: 0px;
   position: absolute;
   width: 100%;
-  text-align: center; }
+  text-align: center;
+  border-radius: 0 0 1rem 1rem; }
 
 .footer__cont--text {
   font-size: 2rem;

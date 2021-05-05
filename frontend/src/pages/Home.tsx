@@ -11,102 +11,84 @@ import { gsap, Power4,TweenMax, TimelineLite,Power3 } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-const homeContainerVariants = {
-	hidden: {
-		opacity: 0
-	},
-	visible: {
-		opacity: 1,
-		transition: {
-			delay: 1.5,
-			duration: 2
-		}
-	},
-	exit: {
-		x: '-100vw',
-		transition: {
-			ease: 'easeInOut'
-		}
-	}
-};
-
 const Home: React.FC = () => {
-	const t1 = gsap.timeline();
-	const images = useRef<HTMLDivElement>(null);
-	const textBox = useRef<HTMLDivElement>(null);
-	const app = useRef<HTMLDivElement>(null);
 
-	const tlite = new TimelineLite()
+	const tlite = new TimelineLite({ delay: 0.3 })
+	useEffect(() => {
+		tlite.from('.home__cont__upper', { y: 15, opacity: 0, ease: Power3.easeInOut, delay: 0.2 }, 'Start')
+		tlite.staggerFrom(["#teaChain-title", "#teaChain-cont"], 1, { y: 30, ease: Power3.easeOut, opacity: 0 }, 0.5, 'Start')
+			.from(['.header__cont__logo', '.header__cont__title'], { y: -10, opacity: 0, ease: Power3.easeOut, delay: 0.2 }, 0.35)
+		
+		gsap.from('.home__cont__lower', {
+			duration: 3,
+			y: '100',
+			opacity: 0,
+			ease: 'ease-in',
+			scrollTrigger: {
+				id:'`section-1',
+				trigger: '.home__cont__lower__about',
+				// pin: true, 
+				start: 'top center+=100',
+				// end: "+=800",
+				// end: 'bottom 50%',
+				markers: true,
+				toggleActions: 'play none none reverse ',
+			}
+		})
+	},[])
+
+
 	const [tl] = useState(gsap.timeline({delay: 5.8}));
 	useEffect(() => {
-		console.log(app, images)
-		
-		const textbox1 = textBox.current?.children[0];
-		const textbox2 = textBox.current?.children[1];
-		// console.log(textbox)
-		// const ethText = images.current?.firstElementChild as any
-		// const ethGirl = images.current?.lastElementChild as any
-		// console.log(images.current?.lastElementChild, ethText)
 
-		// gsap.from("#text", {
-		// 	x: -100,
-		// 	stagger: { // wrap advanced options in an object
-		// 		each: 0.8,
-		// 		from: "center",
-		// 		// grid: "auto",
-		// 		ease: "power2.inOut",
-		// 		repeat: 0 // Repeats immediately, not waiting for the other staggered animations to finish
-		// 	}
-		// })
+		// t1.staggerFrom([textbox1, textbox2], 1, {
+		// 	y: 14,
+		// 	opacity: 0,
+		// 	ease: Power3.easeOut,
+		// 	delay: 1,
+		// }, .15)
 
-		t1.staggerFrom([textbox1, textbox2], 1, {
-			y: 14,
-			opacity: 0,
-			ease: Power3.easeOut,
-			delay: 1,
-		}, .15)
-
-		t1.from("#text-1", {
-			x: "-100%",
-			opacity: 0,
-			duration: 2,
-			ease: Power3.easeOut,
-		}).from("#img-1", {
-			x: "200%",
-			// opacity: 0,
-			duration: 2,
-			ease: Power3.easeOut,
-		},.5)
-		.from("#img-2", {
-			x: "-200%",
-			// opacity: 0,
-			duration: 2,
-			ease: Power3.easeOut,
-		},1.5)
-		.from("#text-2", {
-			x: "200%",
-			// opacity: 0,
-			duration: 2,
-			ease: Power3.easeOut,
-		},2)
-		.from("#text-3", {
-			x: "-200%",
-			// opacity: 0,
-			duration: 2,
-			ease: Power3.easeOut,
-		},2.5)
-		.from("#img-3", {
-			x: "200%",
-			// opacity: 0,
-			duration: 2,
-			ease: Power3.easeOut,
-		},3)
+		// t1.from("#text-1", {
+		// 	x: "-100%",
+		// 	opacity: 0,
+		// 	duration: 2,
+		// 	ease: Power3.easeOut,
+		// }).from("#img-1", {
+		// 	x: "200%",
+		// 	// opacity: 0,
+		// 	duration: 2,
+		// 	ease: Power3.easeOut,
+		// },.5)
+		// .from("#img-2", {
+		// 	x: "-200%",
+		// 	// opacity: 0,
+		// 	duration: 2,
+		// 	ease: Power3.easeOut,
+		// },1.5)
+		// .from("#text-2", {
+		// 	x: "200%",
+		// 	// opacity: 0,
+		// 	duration: 2,
+		// 	ease: Power3.easeOut,
+		// },2)
+		// .from("#text-3", {
+		// 	x: "-200%",
+		// 	// opacity: 0,
+		// 	duration: 2,
+		// 	ease: Power3.easeOut,
+		// },2.5)
+		// .from("#img-3", {
+		// 	x: "200%",
+		// 	// opacity: 0,
+		// 	duration: 2,
+		// 	ease: Power3.easeOut,
+		// },3)
 
 	},[tl])
 	return (
-		<motion.div className="home__cont" ref={app}>
+		<motion.div className="home__cont" >
 			<motion.div className="home__cont__upper">
-				<motion.div className="home__cont__upper__text" ref={ textBox }>
+				<motion.div className="home__cont__upper__text">
 					<motion.h1 className="home__cont__upper__text--title" id="teaChain-title">TEA CHAIN</motion.h1>
 					<motion.h4 className="home__cont__upper__text--content" id="teaChain-cont">
 						A blockchain platform to showcase the journey of tea leaves
@@ -118,7 +100,7 @@ const Home: React.FC = () => {
 				</motion.div>
 			</motion.div>
 			<motion.div className="home__cont__lower">
-				<motion.div className="home__cont__lower__about" ref={images}>
+				<motion.div className="home__cont__lower__about" >
 					<motion.div
 						className="home__cont__lower__about__text"
 						id="text-1"

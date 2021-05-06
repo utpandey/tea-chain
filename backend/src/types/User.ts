@@ -4,6 +4,10 @@ export interface IUser extends Document {
   email: string,
   password: string,
   type: string,
+  passwordResetToken: string,
+  passwordResetExpires: Date,
+  emailVerificationToken: string,
+  emailVerified: boolean,
   // eslint-disable-next-line no-unused-vars
   comparePassword(password: string): Promise<Partial<IUser>>;
   sendRegistrationMail(): void;

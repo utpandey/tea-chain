@@ -1,6 +1,17 @@
 import User from '../models/User';
 import { UserSignup, UserSignin } from '../types/User';
 
+const verifyUser = async (verificationToken: string) => {
+  const user = await User.findOneAndUpdate(
+    { emailVerificationToken: verificationToken }, { emailVerified: true }, { new: true },
+  );
+  if (user) {
+    return user;
+  }
+
+  throw new Error('Invalid registration link');
+};
+
 const sendRegistrationLink = async (params: Partial<UserSignin>) => {
   const result = await User.findOne({ email: params.email });
   if (result) {
@@ -37,4 +48,6 @@ const login = async (params: UserSignin) => {
   throw new Error('User not found');
 };
 
-export default { sendRegistrationLink, createUser, login };
+export default {
+  verifyUser, sendRegistrationLink, createUser, login,
+};

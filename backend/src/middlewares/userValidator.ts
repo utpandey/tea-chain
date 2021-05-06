@@ -1,9 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
-import { body, validationResult } from 'express-validator';
+import { query, body, validationResult } from 'express-validator';
 import logger from '../config/logger';
 import { ErrorMessage } from '../types/User';
 
 const NAMESPACE = 'USER VALIDATOR';
+
+const verificationCodeValidationRules = () => [
+  query('id').isString(),
+  query('id').isLength({ min: 40, max: 40 }),
+];
 
 const linkValidationRules = () => [
   body('email').isEmail(),
@@ -36,5 +41,9 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
-  linkValidationRules, loginValidationRules, registerValidationRules, validate,
+  verificationCodeValidationRules,
+  linkValidationRules,
+  loginValidationRules,
+  registerValidationRules,
+  validate,
 };

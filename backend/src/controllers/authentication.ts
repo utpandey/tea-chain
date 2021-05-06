@@ -1,6 +1,26 @@
 import { Request, Response } from 'express';
 import UserProfileServices from '../services/UserProfileService';
 
+const verifyUser = async (req: Request, res: Response) => {
+  try {
+    const verificationToken = req.query.id as string;
+    if (verificationToken) {
+      const result = await UserProfileServices.verifyUser(verificationToken);
+      if (result) {
+        res.status(200).json({
+          result: true,
+          message: result,
+        });
+      }
+    }
+  } catch (err) {
+    res.status(406).json({
+      result: false,
+      message: err,
+    });
+  }
+};
+
 const registrationMail = async (req: Request, res: Response) => {
   try {
     const result = await UserProfileServices.sendRegistrationLink(req.body);
@@ -71,4 +91,6 @@ const register = async (req: Request, res: Response) => {
   }
 };
 
-export default { registrationMail, login, register };
+export default {
+  verifyUser, registrationMail, login, register,
+};

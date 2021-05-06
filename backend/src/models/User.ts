@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import crypto from 'crypto';
 import EmailServices from '../services/EmailServices';
 import { IUser } from '../types/User';
 
@@ -15,7 +16,6 @@ const UserSchema = new mongoose.Schema<IUser>({
     name: String,
     gender: String,
     location: String,
-    website: String,
     picture: String,
   },
 }, { timestamps: true });
@@ -23,6 +23,8 @@ const UserSchema = new mongoose.Schema<IUser>({
 /* eslint-disable consistent-return */
 UserSchema.pre<IUser>('save', function save(this: IUser, next) {
   const user = this;
+  user.emailVerified = false;
+  user.emailVerificationToken = crypto.randomBytes(20).toString('hex');
   if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, (saltErr, salt) => {
     if (saltErr) { return next(saltErr); }
@@ -53,7 +55,10 @@ UserSchema.method('comparePassword', function comparePassword(password: string):
 });
 
 UserSchema.method('sendRegistrationMail', function sendRegistrationMail(): void {
-  EmailServices.sendEmail(this.email, 'Registration Link', 'Registration');
+  const data = {
+    verificationLink: 'https://www.google.com',
+  };
+  EmailServices.sendEmail(this.email, 'Registration Link', 'Registration', data);
 });
 
 const User = mongoose.model<IUser>('User', UserSchema);

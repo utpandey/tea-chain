@@ -1,24 +1,36 @@
-import React, { useEffect } from 'react'
-import axios from 'axios';
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
+import { GoVerified } from 'react-icons/go';
+import { BiLoaderAlt } from 'react-icons/bi';
+import axios from '../utils/axios';
 
 const Verification = () => {
-  const verificationId = useParams<{id: string}>();
+  const verificationId = useParams<{ id: string }>();
+  const [authenticationLoader, setAuthenticationLoader] = useState<boolean>(false)
 
   useEffect(() => {
-    const baseUrl = 'http://localhost:8080'
     console.log(verificationId.id)
-    axios({
-      url: baseUrl + '/authentication/verification?id=' + verificationId.id,
-      method: 'GET',
-    }).then(res=> {
+    axios.get('/authentication/verification?id=' + verificationId.id).then(res => {
       console.log(res);
+      setAuthenticationLoader(true);
     })
   }, [verificationId])
 
   return (
-    <div>
-      <h1>{verificationId.id}</h1>
+    <div className="verification__cont">
+      {
+        authenticationLoader ?
+          (
+            <div className="verified__cont">
+              <GoVerified className="verified__icon" size={72} />
+              <h1>Congratulations! Your account has been verified.</h1>
+            </div>
+          )
+          : 
+          (
+            <BiLoaderAlt className="loading__icon" size={72} />
+          )
+      }
     </div>
   )
 }

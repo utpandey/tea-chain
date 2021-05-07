@@ -25,6 +25,7 @@ ORDER: Base + typography > general layout + grid > page layout > components
   --color-grey-dark-1: #333;
   --color-grey-dark-2: #777;
   --color-grey-dark-3: #999;
+  --color-green-light-1: #6fbf73;
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, .3);
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, .06);
   --line: 1px solid var(--color-grey-light-2); }
@@ -249,3 +250,31 @@ html {
 .footer__cont--text {
   font-size: 1.5rem;
   color: black; }
+
+.verification__cont {
+  background-color: var(--color-primary-3);
+  padding: 2em;
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-light-3); }
+
+.verification__cont .verified__cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.verification__cont .verified__cont .verified__icon {
+  margin: 2em;
+  color: var(--color-green-light-1); }
+
+.verification__cont .loading__icon {
+  animation: rotation 2s infinite linear; }
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }

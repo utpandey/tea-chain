@@ -8,11 +8,13 @@
     justify-content: space-between;
     &__logo {
         cursor: pointer;
-        width: 7rem;
-        height: 7rem;
+        width: 9rem;
+        height: 9rem;
         margin: 0 0rem 0 5rem;
         align-items: center;
         z-index: 999;
+        // background-color: #f00;
+        margin-top: -10px;
     }
     &__title {
         display: flex;
@@ -31,9 +33,10 @@
             &::before {
                 content: "";
                 position: absolute;
+                // ottom: 2rem;
                 width: 100%;
                 height: 2px;
-                bottom: 0;
+                bottom: -10px;
                 left: 0;
                 background-color: var(--color-primary-4);
                 visibility: hidden;

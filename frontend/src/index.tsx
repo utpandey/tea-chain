@@ -8,6 +8,7 @@ import './styles/css/index.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import SignIn from './pages/SignIn';
 
 const routing = (
 	<Router>
@@ -15,8 +16,11 @@ const routing = (
 			<Header />
 			<AnimatePresence exitBeforeEnter={true}>
 				<Switch>
-					<Route path="/">
+					<Route exact={true} path="/">
 						<Home />
+					</Route>
+					<Route exact={true} path="/signin">
+						<SignIn />
 					</Route>
 				</Switch>
 			</AnimatePresence>

@@ -1,10 +1,10 @@
     .home__cont {
         background-color: var(--color-primary-3);
-        position: absolute;
+        // position: absolute;
         z-index: -1;
         width: 100%;
         // height: 60%;
-        overflow: hidden;
+        // overflow: hidden;
         @include respond(tab-land) {
             height: 58%;
         }
@@ -55,7 +55,7 @@
         &__lower {
             background-color: #fff;
             height: 100%;
-            padding: 10rem;
+            padding: 5rem 10rem 5rem 10rem;
             &__about {
                 // background-color: #000;
                 display: flex;

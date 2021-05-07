@@ -1,12 +1,12 @@
 .footer__cont {
     background-color: var(--color-primary-4);
-    bottom: 0px;
-    position: absolute;
+    // bottom: 0px;
+    // position: absolute;
     width: 100%;
     text-align: center;
     border-radius: 0 0 1rem 1rem;
     &--text {
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: black;
     }
 }

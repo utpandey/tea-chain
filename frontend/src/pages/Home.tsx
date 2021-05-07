@@ -19,16 +19,16 @@ const Home: React.FC = () => {
 		tlite.staggerFrom(["#teaChain-title", "#teaChain-cont"], 1, { y: 30, ease: Power3.easeOut, opacity: 0 }, 0.5, 'Start')
 			.from(['.header__cont__logo', '.header__cont__title'], { y: -10, opacity: 0, ease: Power3.easeOut, delay: 0.2 }, 0.35)
 		
-		gsap.from('.home__cont__lower', {
+		gsap.from('.home__cont__lower__about', {
 			duration: 3,
-			y: '100',
+			y: '150',
 			opacity: 0,
 			ease: 'ease-in',
 			scrollTrigger: {
 				id:'`section-1',
-				trigger: '.home__cont__lower__about',
-				// pin: true, 
-				start: 'top center+=100',
+				trigger: '.home__cont__lower__about__text',
+				scrub: 1,
+				start: 'top center+=90',
 				// end: "+=800",
 				// end: 'bottom 50%',
 				markers: true,

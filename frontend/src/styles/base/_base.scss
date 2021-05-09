@@ -1,10 +1,10 @@
 /* fonts */
 
+@import url(//db.onlinewebfonts.com/c/1094504ae47cb9cfa800bc04261c211a?family=Geomanist);
 @font-face {
-    font-family: 'Quicksand';
-    src: url('/Quicksand-Light.woff2') format('woff2'), url('/Quicksand-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
+    font-family: "Geomanist";
+    src: url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.eot");
+    src: url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.woff") format("woff"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.svg#Geomanist") format("svg");
 }
 
 
@@ -18,7 +18,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 100vh;
-    //font-family: 'Quicksand';
+    font-family: "Geomanist";
     //font-family: 'Walter Turncoat', cursive !important;
     letter-spacing: 2px;
     list-style-type: none;

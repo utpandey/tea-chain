@@ -8,7 +8,8 @@ import './styles/css/index.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import SignIn from './pages/SignIn';
+import Signin from './pages/Signin';
+import Signup from './pages/Signup';
 import Verification from './pages/Verification';
 
 const routing = (
@@ -21,7 +22,10 @@ const routing = (
 						<Home />
 					</Route>
 					<Route exact={true} path="/signin">
-						<SignIn />
+						<Signin />
+					</Route>
+					<Route exact={true} path="/signup">
+						<Signup />
 					</Route>
 					<Route path="/verification/:id">
 						<Verification />

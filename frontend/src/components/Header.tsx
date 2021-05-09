@@ -1,11 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-// import git2 from './github_2.svg';
-// import git3 from './github_3.svg';
 import { withRouter } from 'react-router';
-
-import Logo from '../assets/logo.svg';
 
 const svgVariants = {
 	hidden: { rotate: -180 },
@@ -68,7 +64,7 @@ const Header = () => {
 						Sign In
 					</motion.h1>
 				</Link>
-				<Link to="/" style={{ textDecoration: 'none' }}>
+				<Link to="/signup" style={{ textDecoration: 'none' }}>
 					<motion.h1 className="header__cont__title__text">
 						{/* whileHover={{color: 'black',scale: '0.9'}} */}
 						Sign Up

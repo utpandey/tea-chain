@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
+import Verification from './pages/Verification';
 
 const routing = (
 	<Router>
@@ -21,6 +22,9 @@ const routing = (
 					</Route>
 					<Route exact={true} path="/signin">
 						<SignIn />
+					</Route>
+					<Route path="/verification/:id">
+						<Verification />
 					</Route>
 				</Switch>
 			</AnimatePresence>

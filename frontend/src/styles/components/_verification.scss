@@ -1,0 +1,31 @@
+.verification__cont {
+  background-color: var(--color-primary-3);
+  padding: 2em;
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-light-3);
+  .verified__cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .verified__icon {
+      margin: 2em;
+      color: var(--color-green-light-1);
+    }
+  }
+  .loading__icon {
+    animation: rotation 2s infinite linear;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

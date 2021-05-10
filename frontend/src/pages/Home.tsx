@@ -1,4 +1,4 @@
-import React, { useEffect,useState, useRef } from 'react';
+import React, { useEffect,useState } from 'react';
 import { motion } from 'framer-motion';
 
 import EthGirl from '../assets/ethGirl.svg';
@@ -7,7 +7,7 @@ import TeaGif from '../assets/TeaGif.gif';
 import Supply from '../assets/SupplyChain.svg';
 import QR from '../assets/QR.svg';
 
-import { gsap, Power4,TweenMax, TimelineLite,Power3 } from 'gsap'
+import { gsap, TimelineLite,Power3 } from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 

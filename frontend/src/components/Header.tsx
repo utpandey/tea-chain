@@ -1,15 +1,15 @@
-import React from 'react';
+// import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 
-const svgVariants = {
-	hidden: { rotate: -180 },
-	visible: {
-		rotate: 0,
-		transition: { duration: 1 }
-	}
-};
+// const svgVariants = {
+// 	hidden: { rotate: -180 },
+// 	visible: {
+// 		rotate: 0,
+// 		transition: { duration: 1 }
+// 	}
+// };
 
 // const pathVariants = {
 //   hidden: {

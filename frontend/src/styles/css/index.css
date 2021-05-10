@@ -295,6 +295,21 @@ html {
     max-width: 70rem;
     margin: 8rem auto; } }
 
+.page-enter {
+  opacity: 0; }
+
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+  transition-delay: 600ms; }
+
+.page-exit {
+  opacity: 1; }
+
+.page-exit-active {
+  opacity: 0;
+  transition: opacity 400ms; }
+
 .header__cont {
   background-color: var(--color-primary-3);
   height: 10rem;

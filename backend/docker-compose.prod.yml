@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  tea-chain:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+      target: base
+    container_name: tea-chain
+    env_file: .env
+    environment:
+      - PORT=$PORT
+      - DATABASE_URI=$DATABASE_URI
+      - DATABASE_USERNAME=$DATABASE_USERNAME
+      - DATABASE_PASSWORD=$DATABASE_PASSWORD
+      - DATABASE_HOST=mongodb
+      - DATABASE_PORT=$DATABASE_PORT
+      - DATABASE_DB=$DATABASE_DB
+      - EMAIL_USER=$EMAIL_USER
+      - CLIENT_ID=$CLIENT_ID
+      - CLIENT_SECRET=$CLIENT_SECRET
+      - REDIRECT_URI=$REDIRECT_URI
+      - REFRESH_TOKEN=$REFRESH_TOKEN
+    networks:
+      - mongodb_network
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+    depends_on: 
+      - mongodb
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$DATABASE_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$DATABASE_PASSWORD
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - mongodb_network
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+
+networks:
+  mongodb_network:
+    driver: bridge
+
+volumes:
+  mongodb-data:

@@ -31,7 +31,7 @@ const Home: React.FC = () => {
 				start: 'top center+=90',
 				// end: "+=800",
 				// end: 'bottom 50%',
-				markers: true,
+				markers: false,
 				toggleActions: 'play none none reverse ',
 			}
 		})
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
 		<motion.div className="home__cont" >
 			<motion.div className="home__cont__upper">
 				<motion.div className="home__cont__upper__text">
-					<motion.h1 className="home__cont__upper__text--title" id="teaChain-title">TEA CHAIN</motion.h1>
+					<motion.h1 className="home__cont__upper__text--title" id="teaChain-title">Tea Chain</motion.h1>
 					<motion.h4 className="home__cont__upper__text--content" id="teaChain-cont">
 						A blockchain platform to showcase the journey of tea leaves
 					</motion.h4>

@@ -20,14 +20,16 @@
                 justify-content: space-between;
                 &--title {
                     color: #fff;
-                    font-size: 4rem;
+                    font-size: 6rem;
+                    font-weight: 700;
                 }
                 &--content {
                     // background-color: #fff;
                     color: #57F7C9;
-                    font-size: 2rem;
-                    width: 40%;
-                    margin-left: 30%;
+                    font-size: 3rem;
+                    font-weight: 400;
+                    width: 60%;
+                    margin: auto;
                 }
             }
             &__imgCont {

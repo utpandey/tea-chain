@@ -1,6 +1,7 @@
 /* fonts */
 
-@import url(//db.onlinewebfonts.com/c/1094504ae47cb9cfa800bc04261c211a?family=Geomanist);
+// @import url(//db.onlinewebfonts.com/c/1094504ae47cb9cfa800bc04261c211a?family=Geomanist);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 @font-face {
     font-family: "Geomanist";
     src: url("//db.onlinewebfonts.com/t/1094504ae47cb9cfa800bc04261c211a.eot");
@@ -15,9 +16,10 @@ body {
     padding: 0;
     color: var(--color-grey-dark-2);
     background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-2));
+    overflow-y: auto;
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: "Geomanist";
+    font-family: "Inter", sans-serif;
     letter-spacing: 2px;
     list-style-type: none;
     text-decoration: none;
@@ -32,6 +34,7 @@ body {
 html {
     box-sizing: border-box;
     font-size: 62.5%; // 1rem = 10px, 10px/16px = 62.5%
+    min-height: 100%;
     @media only screen and (max-width: $bp-large) {
         font-size: 50%;
     }

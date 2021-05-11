@@ -12,7 +12,7 @@ $breakpoint arguement choices:
 ORDER: Base + typography > general layout + grid > page layout > components
 1em = 16px
 */
-@import url(//db.onlinewebfonts.com/c/1094504ae47cb9cfa800bc04261c211a?family=Geomanist);
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 :root {
   --color-primary-1: #EE9999;
   --color-primary-3: #29386E;
@@ -43,9 +43,10 @@ body {
   padding: 0;
   color: var(--color-grey-dark-2);
   background-image: linear-gradient(to right bottom, var(--color-primary-1), var(--color-primary-2));
+  overflow-y: auto;
   background-size: cover;
   background-repeat: no-repeat;
-  font-family: "Geomanist";
+  font-family: "Inter", sans-serif;
   letter-spacing: 2px;
   list-style-type: none;
   text-decoration: none; }
@@ -57,7 +58,8 @@ body {
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  min-height: 100%; }
 
 @media only screen and (max-width: 68.75em) {
   html {
@@ -107,13 +109,15 @@ html {
 
 .home__cont__upper__text--title {
   color: #fff;
-  font-size: 4rem; }
+  font-size: 6rem;
+  font-weight: 700; }
 
 .home__cont__upper__text--content {
   color: #57F7C9;
-  font-size: 2rem;
-  width: 40%;
-  margin-left: 30%; }
+  font-size: 3rem;
+  font-weight: 400;
+  width: 60%;
+  margin: auto; }
 
 .home__cont__upper__imgCont {
   display: flex;
@@ -340,7 +344,7 @@ html {
   text-decoration: none;
   font-weight: 400;
   font-size: 2.5rem;
-  color: var(--color-primary-4);
+  color: var(--color-grey-light-1);
   transition: all .35s ease; }
 
 .header__cont__title__text::before {

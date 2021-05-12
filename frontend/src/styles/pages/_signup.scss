@@ -5,3 +5,81 @@
     width: 50%;
     margin: 0 auto;
 }
+
+.signup__cont {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background: #ffffff;
+    &__left {
+        padding: 5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        &__title {
+            margin: 0 0 2rem 0;
+            color: black;
+            font-size: 4rem;
+        }
+        &__inputCont {
+            margin: 2rem 0 2rem 0;
+            display: block;
+            // height: 200px;
+            width: 30%;
+            // border: solid 1px #CCC;
+            border-bottom: none;
+            position: relative;
+            &:after {
+                content: "";
+                background: -webkit-linear-gradient(left, #EE9999 0%, #D44529 100%);
+                display: block;
+                height: 8px;
+                width: 100%;
+                position: absolute;
+                // bottom: 0;
+            }
+            &__input {
+                height: 100%;
+                width: 100%;
+                border: none;
+                transition: all .3s linear;
+                -webkit-appearance: none;
+                &:focus {
+                    // border-bottom: solid 1px black;
+                    outline: 0;
+                    box-shadow: 0 2px 6px -8px rgba(black, .45);
+                }
+            }
+        }
+        &__otherCont {
+            margin: 2rem 0 2rem 0;
+        }
+        &__submitBtn {
+            margin: 2rem 0 2rem 0;
+            padding: 2rem;
+            width: 30%;
+            background-image: linear-gradient(to right, var(--color-primary-1), var(--color-primary-2));
+            color: #fff;
+            border: none;
+            span {
+                transform: rotateX(90%);
+            }
+        }
+        &__msg {
+            font-size: 2rem;
+            color: #000;
+            &__link {
+                text-decoration: none;
+                color: #D44529;
+            }
+        }
+    }
+    &__right {
+        background-color: #f99;
+        flex: 1;
+    }
+}

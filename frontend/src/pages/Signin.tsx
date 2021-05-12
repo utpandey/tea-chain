@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 // import './Login.style.scss';
 
 const Signin = () => {
-	const [ { username, password }, setCredentials ] = useState({
-		username: '',
+	const [ { email, password }, setCredentials ] = useState({
+		email: '',
 		password: ''
 	});
 
@@ -15,7 +15,7 @@ const Signin = () => {
 	// const login = async (event: React.FormEvent) => {
 	// 	event.preventDefault();
 	// 	const response = await onLogin({
-	// 		username,
+	// 		email,
 	// 		password
 	// 	});
 
@@ -34,17 +34,25 @@ const Signin = () => {
 						<span>Sign In</span>
 					</h4>
 					<p className="signup__cont__session__right__info--1">Welcome back! Log in to your account</p>
+					<div className="div">
 					<input
+						required={true}
 						className="signup__cont__session__right__input"
-						type="text"
-						placeholder="Username"
-						value={username}
+						type="input"
+						placeholder="Email"
+						value={email}
+						id="email"
 						onChange={(event) =>
 							setCredentials({
-								username: event.target.value,
+								email: event.target.value,
 								password
 							})}
 					/>
+					</div>
+				
+					<label htmlFor="email" className="signup__cont__session__right__label">
+						email
+					</label>
 					<input
 						className="signup__cont__session__right__input"
 						type="password"
@@ -52,10 +60,13 @@ const Signin = () => {
 						value={password}
 						onChange={(event) =>
 							setCredentials({
-								username,
+								email,
 								password: event.target.value
 							})}
 					/>
+					<label htmlFor="password" className="signup__cont__session__right__label">
+						Password
+					</label>
 					<button type="button" className="signup__cont__session__right__btn">
 						Login
 					</button>

@@ -164,13 +164,6 @@ html {
 .home__cont__lower__about__text:nth-of-type(1) {
   top: 10px; }
 
-.authform {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 50%;
-  margin: 0 auto; }
-
 .signup__cont {
   height: 100%;
   width: 100%;
@@ -178,24 +171,24 @@ html {
   flex-direction: row;
   align-items: flex-start;
   justify-content: flex-start;
-  background: #ffffff; }
+  background: #ffffff;
+  padding: 5rem; }
 
 .signup__cont__left {
-  padding: 5rem;
-  flex: 1;
+  flex: 0.6;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly; }
+  justify-content: space-evenly;
+  align-self: center; }
 
 .signup__cont__left__title {
   margin: 0 0 2rem 0;
   color: black;
-  font-size: 4rem; }
+  font-size: 3rem; }
 
 .signup__cont__left__inputCont {
   margin: 2rem 0 2rem 0;
   display: block;
-  width: 30%;
   border-bottom: none;
   position: relative; }
 
@@ -203,7 +196,7 @@ html {
   content: "";
   background: -webkit-linear-gradient(left, #EE9999 0%, #D44529 100%);
   display: block;
-  height: 8px;
+  height: 5px;
   width: 100%;
   position: absolute; }
 
@@ -212,6 +205,7 @@ html {
   width: 100%;
   border: none;
   transition: all .3s linear;
+  font-size: 2rem;
   -webkit-appearance: none; }
 
 .signup__cont__left__inputCont__input:focus {
@@ -221,19 +215,30 @@ html {
 .signup__cont__left__otherCont {
   margin: 2rem 0 2rem 0; }
 
+.signup__cont__left__otherCont__title {
+  font-size: 1.5rem; }
+
 .signup__cont__left__submitBtn {
   margin: 2rem 0 2rem 0;
-  padding: 2rem;
-  width: 30%;
+  padding: 1rem 1rem 1rem 1rem;
+  font-size: 2rem;
   background-image: linear-gradient(to right, var(--color-primary-1), var(--color-primary-2));
   color: #fff;
-  border: none; }
+  border: none;
+  position: relative;
+  transition: all .3s linear;
+  cursor: pointer; }
 
 .signup__cont__left__submitBtn span {
+  position: absolute;
+  right: 2rem;
   transform: rotateX(90%); }
 
+.signup__cont__left__submitBtn:hover {
+  opacity: 0.90; }
+
 .signup__cont__left__msg {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #000; }
 
 .signup__cont__left__msg__link {
@@ -241,8 +246,25 @@ html {
   color: #D44529; }
 
 .signup__cont__right {
-  background-color: #f99;
-  flex: 1; }
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center; }
+
+.signup__cont__right__img {
+  width: 55%;
+  background-color: #f00; }
+
+.signupImg--1 {
+  margin-left: 50%; }
+
+.signupImg--2 {
+  width: 60%;
+  margin-right: 30%; }
+
+.signupImg--3 {
+  margin-left: 40%; }
 
 .container {
   max-width: 150rem;

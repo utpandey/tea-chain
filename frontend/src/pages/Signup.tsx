@@ -1,13 +1,43 @@
-import { useState } from 'react';
-// import { onRegister } from '../components/authapi';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap, TimelineLite, Power3 } from 'gsap';
+
+import signup1 from '../assets/signup1.png'
+import signup2 from '../assets/signup2.png'
+import signup3 from '../assets/signup3.png'
 
 const Signup = () => {
+	const tlite = new TimelineLite({ delay: 0.3 });
 	const [ { username, password, repeatPassword }, setRegisterData ] = useState({
 		username: '',
 		password: '',
 		repeatPassword: ''
 	});
+
+	useEffect(
+		() => {
+			tlite.from('.signup__cont__left',
+				{
+					y: 15,
+					opacity: 0,
+					ease: Power3.easeIn,
+					delay: 0.2
+				}, 'Start')
+				.from('.signupImg--1', {
+					y: 15,
+					opacity: 0,
+					ease: Power3.easeIn,
+					delay: 0,
+				})
+				.from('.signupImg--2', {
+					y: 15,
+					opacity: 0,
+					ease: Power3.easeIn,
+					delay: 0.
+			})
+		},
+		[ tlite ]
+	);
 
 	// const [ error, setError ] = useState('');
 
@@ -56,7 +86,7 @@ Already have an account? <Link to="/signin">Login</Link>
 						<input type="password" name="password" id="password" className="signup__cont__left__inputCont__input" required={true} placeholder="Password"/>
 				</div>
 				<div className="signup__cont__left__inputCont">
-						<input type="password" name="confirmPass" id="confirmPass" className="signup__cont__left__inputCont__input" required={true} placeholder="Coonfirm Password"/>
+						<input type="password" name="confirmPass" id="confirmPass" className="signup__cont__left__inputCont__input" required={true} placeholder="Confirm Password"/>
 				</div>
 				<div className="signup__cont__left__otherCont">
 					<h1 className="signup__cont__left__otherCont__title">Role</h1>
@@ -81,7 +111,9 @@ Already have an account? <Link to="/signin">Login</Link>
 					</p>
 			</div>
 			<div className="signup__cont__right">
-				<p>adsa</p>
+				<img src={signup1} alt="" className="signup__cont__right__img signupImg--1" />
+				<img src={signup2} alt="" className="signup__cont__right__img signupImg--2" />
+				{/* <img src={ signup3} alt="" className="signup__cont__right__img signupImg--3"/> */}
 			</div>
 		</div>
 	);

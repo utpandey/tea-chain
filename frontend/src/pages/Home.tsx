@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import EthGirl from '../assets/ethGirl.svg';
 import HomeImage from '../assets/home_img.png';
 import TeaGif from '../assets/TeaGif.gif';
+import TeaGif4 from '../assets/TeaGif4.gif';
 import Supply from '../assets/SupplyChain.svg';
 import QR from '../assets/QR.svg';
 
@@ -95,7 +96,7 @@ const Home: React.FC = () => {
 					</motion.h4>
 				</motion.div>
 				<motion.div className="home__cont__upper__imgCont">
-					<motion.img src={TeaGif} className="home__cont__upper__imgCont--img gif" />
+					<motion.img src={TeaGif4} className="home__cont__upper__imgCont--img gif" />
 					<motion.img src={HomeImage} className="home__cont__imgCont--img" />
 				</motion.div>
 			</motion.div>

@@ -53,7 +53,21 @@ const routing = (
 		<motion.div className="container">
 			<Header />
 			<AnimatePresence exitBeforeEnter={true}>
-				{routes.map(({ path, name, Component }) => (
+				<Switch>
+					<Route exact={true} path="/">
+						<Home />
+					</Route>
+					<Route exact={true} path="/signin">
+						<Signin />
+					</Route>
+					<Route exact={true} path="/signup">
+						<Signup />
+					</Route>
+					<Route path="/verification/:id">
+						<Verification />
+					</Route>
+				</Switch>
+				{/* {routes.map(({ path, name, Component }) => (
 					<Route key={name} path={path} exact={true}>
 						{({ match }) => (
 							<CSSTransition
@@ -70,7 +84,7 @@ const routing = (
 							</CSSTransition>
 						)}
 					</Route>
-				))}
+				))} */}
 			</AnimatePresence>
 			<Footer />
 		</motion.div>

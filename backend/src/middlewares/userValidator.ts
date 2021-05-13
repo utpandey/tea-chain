@@ -19,6 +19,16 @@ const loginValidationRules = () => [
   body('password').isHash('md5'),
 ];
 
+const forgotPasswordValidationRules = () => [
+  body('email').isEmail(),
+];
+
+const updatePasswordValidationRules = () => [
+  body('email').isEmail(),
+  body('password').isHash('md5'),
+  body('resetToken').isString(),
+];
+
 const registerValidationRules = () => [
   body('email').isEmail(),
   body('password').isHash('md5'),
@@ -43,6 +53,8 @@ const validate = (req: Request, res: Response, next: NextFunction) => {
 export default {
   verificationCodeValidationRules,
   linkValidationRules,
+  forgotPasswordValidationRules,
+  updatePasswordValidationRules,
   loginValidationRules,
   registerValidationRules,
   validate,

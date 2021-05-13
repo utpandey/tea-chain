@@ -1,5 +1,5 @@
 import User from '../models/User';
-import { UserSignup, UserSignin } from '../types/User';
+import { UserSignup, UserSignin, ForgotPassword } from '../types/User';
 
 const verifyUser = async (verificationToken: string) => {
   const user = await User.findOneAndUpdate(
@@ -8,7 +8,6 @@ const verifyUser = async (verificationToken: string) => {
   if (user) {
     return user;
   }
-
   throw new Error('Invalid registration link');
 };
 
@@ -39,6 +38,27 @@ const createUser = async (params: UserSignup) => {
     });
 };
 
+const forgotPassword = async (params: ForgotPassword) => {
+  const result = await User.findOne({ email: params.email });
+  if (result) {
+    return result.generatePasswordResetToken(params.email);
+  }
+  throw new Error('User doesn\'t exist');
+};
+
+const updatePassword = async (params: ForgotPassword) => {
+  const result = await User.findOne({ email: params.email });
+  if (!result) {
+    throw new Error('User doesn\'t exist');
+  }
+  return result.updatePassword(params.resetToken, params.password).then((res) => ({
+    email: res.email,
+    type: res.type,
+  })).catch((err) => {
+    throw err;
+  });
+};
+
 const login = async (params: UserSignin) => {
   const result = await User.findOne({ email: params.email });
   if (result) {
@@ -49,5 +69,5 @@ const login = async (params: UserSignin) => {
 };
 
 export default {
-  verifyUser, sendRegistrationLink, createUser, login,
+  verifyUser, sendRegistrationLink, createUser, forgotPassword, updatePassword, login,
 };

@@ -4,7 +4,6 @@ import crypto from 'crypto';
 import EmailServices from '../services/EmailServices';
 import serverConfig from '../config';
 import { IUser } from '../types/User';
-import logger from '../config/logger';
 
 const UserSchema = new mongoose.Schema<IUser>({
   email: { type: String, unique: true },
@@ -56,28 +55,26 @@ UserSchema.method('comparePassword', function comparePassword(password: string):
   });
 });
 
-UserSchema.method('generatePasswordResetToken', function generatePasswordResetToken(): boolean {
-  this.passwordResetToken = crypto.randomBytes(20).toString('hex');
-  this.passwordResetExpires = new Date(new Date().getTime() + (30 * 60 * 1000));
+UserSchema.method('generatePasswordResetToken', function generatePasswordResetToken(): Promise<IUser> {
+  const user = this;
+  user.passwordResetToken = crypto.randomBytes(20).toString('hex');
+  user.passwordResetExpires = new Date(new Date().getTime() + (30 * 60 * 1000));
   const data = {
     updatePasswordLink: `${serverConfig.baseURL}/${this.passwordResetToken}`,
   };
   EmailServices.sendEmail(this.email, 'Password Reset Link', 'Forgot Password', data);
-  return true;
+  return user.save();
 });
 
-UserSchema.method('updatePassword', function updatePassword(resetCode: string, updatedPassword: string): Promise<Partial<IUser>> {
+UserSchema.method('updatePassword', function updatePassword(resetCode: string, updatedPassword: string): Promise<IUser> {
+  const user = this;
   return new Promise((resolve, reject) => {
-    logger.info('RESET', 'resetPassword', { a: resetCode, b: this.passwordResetToken });
     if (
       resetCode === this.passwordResetToken
       && new Date().getTime() < this.passwordResetExpires.getTime()
     ) {
-      this.password = updatedPassword;
-      return resolve({
-        email: this.email,
-        type: this.type,
-      });
+      user.password = updatedPassword;
+      return resolve(user.save());
     } if (resetCode === this.passwordResetToken) {
       return reject(
         new Error('Expired token'),

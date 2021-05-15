@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Verification from './pages/Verification';
+import ResetPassword from './pages/ResetPassword';
 
 const routes = [
 	{ path: '/', name: 'Home', Component: Home },
@@ -65,6 +66,9 @@ const routing = (
 					</Route>
 					<Route path="/verification/:id">
 						<Verification />
+					</Route>
+					<Route path="/resetpassword/:id">
+						<ResetPassword />
 					</Route>
 				</Switch>
 				{/* {routes.map(({ path, name, Component }) => (

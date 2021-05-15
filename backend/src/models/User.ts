@@ -60,7 +60,7 @@ UserSchema.method('generatePasswordResetToken', function generatePasswordResetTo
   user.passwordResetToken = crypto.randomBytes(20).toString('hex');
   user.passwordResetExpires = new Date(new Date().getTime() + (30 * 60 * 1000));
   const data = {
-    updatePasswordLink: `${serverConfig.baseURL}/${this.passwordResetToken}`,
+    updatePasswordLink: `${serverConfig.baseURL}/resetpassword/${this.passwordResetToken}`,
   };
   EmailServices.sendEmail(this.email, 'Password Reset Link', 'Forgot Password', data);
   return user.save();
@@ -74,6 +74,7 @@ UserSchema.method('updatePassword', function updatePassword(resetCode: string, u
       && new Date().getTime() < this.passwordResetExpires.getTime()
     ) {
       user.password = updatedPassword;
+      user.passwordResetToken = crypto.randomBytes(20).toString('hex');
       return resolve(user.save());
     } if (resetCode === this.passwordResetToken) {
       return reject(
@@ -88,7 +89,7 @@ UserSchema.method('updatePassword', function updatePassword(resetCode: string, u
 
 UserSchema.method('sendRegistrationMail', function sendRegistrationMail(): void {
   const data = {
-    verificationLink: `${serverConfig.baseURL}/${this.emailVerificationToken}`,
+    verificationLink: `${serverConfig.baseURL}/verification/${this.emailVerificationToken}`,
   };
   EmailServices.sendEmail(this.email, 'Registration Link', 'Registration', data);
 });

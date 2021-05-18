@@ -26,7 +26,10 @@ ORDER: Base + typography > general layout + grid > page layout > components
   --color-grey-dark-1: #333;
   --color-grey-dark-2: #777;
   --color-grey-dark-3: #999;
-  --color-green-light-1: #6fbf73;
+  --color-success: #6fbf73;
+  --color-error: #f44336;
+  --color-warning: #f9a825;
+  --color-info: #2196f3;
   --shadow-dark: 0 2rem 6rem rgba(0, 0, 0, .3);
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, .06);
   --line: 1px solid var(--color-grey-light-2);
@@ -266,6 +269,165 @@ html {
 .signupImg--3 {
   margin-left: 40%; }
 
+.verification__cont {
+  background-color: var(--color-primary-3);
+  padding: 2em;
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-light-3); }
+
+.verification__cont .verified__cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.verification__cont .verified__cont .verified__icon {
+  margin: 2em;
+  color: var(--color-success); }
+
+.verification__cont .verified__cont .invalid_token__icon {
+  margin: 2em;
+  color: var(--color-error); }
+
+.verification__cont .loading__icon {
+  animation: rotation 2s infinite linear; }
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(359deg); } }
+
+.resetpassword__cont {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #ffffff;
+  padding: 5rem; }
+
+.resetpassword__cont__left {
+  flex: 0.6;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-self: center; }
+
+.resetpassword__cont__left__title {
+  margin: 0 0 2rem 0;
+  color: black;
+  font-size: 3rem; }
+
+.resetpassword__cont__left__inputCont {
+  margin: 2rem 0 2rem 0;
+  display: block;
+  border-bottom: none;
+  position: relative; }
+
+.resetpassword__cont__left__inputCont:after {
+  content: "";
+  background: -webkit-linear-gradient(left, #EE9999 0%, #D44529 100%);
+  display: block;
+  height: 5px;
+  width: 100%;
+  position: absolute; }
+
+.resetpassword__cont__left__inputCont__input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  transition: all .3s linear;
+  font-size: 2rem;
+  -webkit-appearance: none; }
+
+.resetpassword__cont__left__inputCont__input:focus {
+  outline: 0;
+  box-shadow: 0 2px 6px -8px rgba(0, 0, 0, 0.45); }
+
+.resetpassword__cont__left__otherCont {
+  margin: 2rem 0 2rem 0; }
+
+.resetpassword__cont__left__otherCont__title {
+  font-size: 1.5rem; }
+
+.resetpassword__cont__left__submitBtn {
+  margin: 2rem 0 2rem 0;
+  padding: 1rem 1rem 1rem 1rem;
+  font-size: 2rem;
+  background-image: linear-gradient(to right, var(--color-primary-1), var(--color-primary-2));
+  color: #fff;
+  border: none;
+  position: relative;
+  transition: all .3s linear;
+  cursor: pointer; }
+
+.resetpassword__cont__left__submitBtn span {
+  position: absolute;
+  right: 2rem;
+  transform: rotateX(90%); }
+
+.resetpassword__cont__left__submitBtn:hover {
+  opacity: 0.90; }
+
+.resetpassword__cont__left__msg {
+  font-size: 1.5rem;
+  color: #000; }
+
+.resetpassword__cont__left__msg__link {
+  text-decoration: none;
+  color: #D44529; }
+
+.resetpassword__cont__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center; }
+
+.resetpassword__cont__right__img {
+  width: 55%;
+  background-color: #f00; }
+
+.resetpassword__result {
+  background: #ffffff;
+  padding: 2em;
+  height: 55vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-dark-1); }
+
+.resetpassword__result__verified__cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.resetpassword__result__verified__cont__icon {
+  margin: 2em;
+  color: var(--color-success); }
+
+.resetpassword__result__verified__cont__icon__invalid {
+  color: var(--color-error); }
+
+.resetpassword__result__loading__icon {
+  animation: rotation 2s infinite linear; }
+
+.resetPasswordImg--1 {
+  margin-left: 50%; }
+
+.resetPasswordImg--2 {
+  width: 60%;
+  margin-right: 30%; }
+
+.resetPasswordImg--3 {
+  margin-left: 40%; }
+
 .container {
   max-width: 150rem;
   margin: 15rem auto;
@@ -372,30 +534,41 @@ html {
   font-size: 1.3rem;
   color: black; }
 
-.verification__cont {
-  background-color: var(--color-primary-3);
-  padding: 2em;
-  height: 55vh;
+.snackbar__cont {
+  position: fixed;
+  top: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 250px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--color-grey-light-3); }
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.2em 2em;
+  z-index: 1; }
 
-.verification__cont .verified__cont {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; }
+.snackbar__cont .info_icon {
+  font-size: 2em;
+  color: #fff; }
 
-.verification__cont .verified__cont .verified__icon {
-  margin: 2em;
-  color: var(--color-green-light-1); }
+.snackbar__cont .info_text {
+  font-size: 2em;
+  color: #fff;
+  padding: 0em 2em; }
 
-.verification__cont .loading__icon {
-  animation: rotation 2s infinite linear; }
+.snackbar__cont .close_icon {
+  font-size: 2em;
+  color: #fff; }
 
-@keyframes rotation {
-  from {
-    transform: rotate(0deg); }
-  to {
-    transform: rotate(359deg); } }
+.snackbar_error {
+  background-color: var(--color-error); }
+
+.snackbar_success {
+  background-color: var(--color-success); }
+
+.snackbar_info {
+  background-color: var(--color-info); }
+
+.snackbar_warning {
+  background-color: var(--color-warning); }

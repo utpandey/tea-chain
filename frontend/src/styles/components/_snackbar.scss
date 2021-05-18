@@ -1,0 +1,46 @@
+.snackbar__cont {
+  position: fixed;
+  top: 20vh;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 250px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.2em 2em;
+  z-index: 1;
+
+  .info_icon {
+    font-size: 2em;
+    color: #fff;
+  }
+
+  .info_text {
+    font-size: 2em;
+    color: #fff;
+    padding: 0em 2em;
+  }
+
+  .close_icon {
+    font-size: 2em;
+    color: #fff;
+  }
+}
+
+.snackbar_error {
+  background-color: var(--color-error);
+}
+
+.snackbar_success {
+  background-color: var(--color-success);
+}
+
+.snackbar_info {
+  background-color: var(--color-info);
+}
+
+.snackbar_warning {
+  background-color: var(--color-warning);
+}

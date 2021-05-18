@@ -10,6 +10,7 @@ export default {
   databaseHost: process.env.DATABASE_HOST,
   databasePort: process.env.DATABASE_PORT,
   databaseDb: process.env.DATABASE_DB,
+  baseURL: process.env.BASE_URI,
   emailUser: process.env.EMAIL_USER,
   clientID: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,

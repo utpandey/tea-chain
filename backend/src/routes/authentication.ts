@@ -8,6 +8,10 @@ router.get('/verification', userValidator.verificationCodeValidationRules(), use
 
 router.post('/registrationLink', userValidator.linkValidationRules(), userValidator.validate, authentication.registrationMail);
 
+router.post('/forgotPassword', userValidator.forgotPasswordValidationRules(), userValidator.validate, authentication.forgotPassword);
+
+router.post('/updatePassword', userValidator.updatePasswordValidationRules(), userValidator.validate, authentication.updatePassword);
+
 router.post('/login', userValidator.loginValidationRules(), userValidator.validate, authentication.login);
 
 router.post('/register', userValidator.registerValidationRules(), userValidator.validate, authentication.register);

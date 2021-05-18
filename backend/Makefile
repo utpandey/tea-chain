@@ -6,3 +6,6 @@ up-prod:
 
 down:
 	docker-compose down
+
+logs:
+	docker-compose logs -f --no-log-prefix

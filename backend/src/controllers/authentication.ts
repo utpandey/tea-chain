@@ -16,7 +16,7 @@ const verifyUser = async (req: Request, res: Response) => {
   } catch (err) {
     res.status(406).json({
       result: false,
-      message: err,
+      message: err.message,
     });
   }
 };
@@ -34,6 +34,40 @@ const registrationMail = async (req: Request, res: Response) => {
     res.status(502).json({
       result: false,
       message: err,
+    });
+  }
+};
+
+const forgotPassword = async (req: Request, res: Response) => {
+  try {
+    const result = await UserProfileServices.forgotPassword(req.body);
+    if (result) {
+      res.status(200).json({
+        result: true,
+        message: 'email sent',
+      });
+    }
+  } catch (err) {
+    res.status(403).json({
+      result: false,
+      message: err,
+    });
+  }
+};
+
+const updatePassword = async (req: Request, res: Response) => {
+  try {
+    const result = await UserProfileServices.updatePassword(req.body);
+    if (result) {
+      res.status(200).json({
+        result: true,
+        message: result,
+      });
+    }
+  } catch (err) {
+    res.status(403).json({
+      result: false,
+      message: err.message,
     });
   }
 };
@@ -92,5 +126,5 @@ const register = async (req: Request, res: Response) => {
 };
 
 export default {
-  verifyUser, registrationMail, login, register,
+  verifyUser, registrationMail, forgotPassword, updatePassword, login, register,
 };

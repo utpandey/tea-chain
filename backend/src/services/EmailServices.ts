@@ -6,6 +6,8 @@ import { google } from 'googleapis';
 import logger from '../config/logger';
 import serverConfig from '../config';
 
+const NAMESPACE = 'EMAIL';
+
 const generateGoogleAccessToken = async () => {
   const oAuth2Client = new google.auth.OAuth2(
     serverConfig.clientID, serverConfig.clientSecret, serverConfig.redirectURL,
@@ -16,11 +18,11 @@ const generateGoogleAccessToken = async () => {
 };
 
 const sendEmail = async (to: string, subject: string, template: string, data: Object = {}) => {
-  const accessToken = await generateGoogleAccessToken;
+  const accessToken = await generateGoogleAccessToken();
   const transporter = nodemailer.createTransport({
-    service: 'Gmail',
+    service: 'gmail',
     auth: {
-      type: 'oauth2',
+      type: 'OAuth2',
       user: serverConfig.emailUser,
       clientId: serverConfig.clientID,
       clientSecret: serverConfig.clientSecret,
@@ -35,16 +37,16 @@ const sendEmail = async (to: string, subject: string, template: string, data: Ob
 
     if (template === 'Registration') {
       userTemplate = await fs.readFile(path.join(__dirname, '..', 'templates', 'verification.html'), 'utf8');
-      textTemplate = '<h1>Registration</h1>';
+      textTemplate = 'Registration';
     } else if (template === 'Welcome') {
       userTemplate = await fs.readFile(path.join(__dirname, '..', 'templates', 'registration.html'), 'utf8');
-      textTemplate = '<h1>Welcome</h1>';
+      textTemplate = 'Welcome';
     } else if (template === 'Forgot Password') {
       userTemplate = await fs.readFile(path.join(__dirname, '..', 'templates', 'forgot_password.html'), 'utf8');
-      textTemplate = '<h1>Forgot Password</h1>';
+      textTemplate = 'Forgot Password';
     } else {
       userTemplate = '<h1>Default Template</h1>';
-      textTemplate = '<h1>Default Template</h1>';
+      textTemplate = 'Default Template';
     }
 
     if (Object.keys(data).length > 0) {
@@ -53,15 +55,15 @@ const sendEmail = async (to: string, subject: string, template: string, data: Ob
     }
 
     const info = await transporter.sendMail({
-      from: '"NodeMailer Contact" <test@teachaintest.com>',
+      from: `"Tea Chain" <${serverConfig.emailUser}>`,
       to,
       subject,
       text: textTemplate,
       html: userTemplate,
     });
-    logger.info('EMAIL', 'sendEmail', info);
+    logger.info(NAMESPACE, 'sendEmail', info);
   } catch (err) {
-    logger.error('EMAIL', 'sendEmail', err);
+    logger.error(NAMESPACE, 'sendEmail', err);
   }
 };
 

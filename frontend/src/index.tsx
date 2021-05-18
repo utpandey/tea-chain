@@ -56,6 +56,7 @@ const routing = (
 				<Switch>
 					<Route exact={true} path="/">
 						<Home />
+						<Home />
 					</Route>
 					<Route exact={true} path="/signin">
 						<Signin />

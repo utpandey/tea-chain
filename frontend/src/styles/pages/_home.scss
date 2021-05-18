@@ -13,6 +13,7 @@
         }
         &__upper {
             // height: 40%;
+            overflow-y: hidden;
             &__text {
                 text-align: center;
                 padding: 5rem;

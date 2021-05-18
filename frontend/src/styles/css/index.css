@@ -106,6 +106,9 @@ html {
   .home__cont {
     height: 55%; } }
 
+.home__cont__upper {
+  overflow-y: hidden; }
+
 .home__cont__upper__text {
   text-align: center;
   padding: 5rem;

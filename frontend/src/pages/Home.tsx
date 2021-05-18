@@ -14,6 +14,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Home: React.FC = () => {
 
+	const [offsetY, setOffsetY] = useState(0);
+	const handleScroll = () => setOffsetY(window.pageYOffset);
 	const tlite = new TimelineLite({ delay: 0.3 })
 	useEffect(() => {
 		tlite.from('.home__cont__upper', { y: 15, opacity: 0, ease: Power3.easeInOut, delay: 0.2 }, 'Start')
@@ -38,66 +40,23 @@ const Home: React.FC = () => {
 		})
 	},[])
 
-
-	const [tl] = useState(gsap.timeline({delay: 5.8}));
 	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
 
-		// t1.staggerFrom([textbox1, textbox2], 1, {
-		// 	y: 14,
-		// 	opacity: 0,
-		// 	ease: Power3.easeOut,
-		// 	delay: 1,
-		// }, .15)
-
-		// t1.from("#text-1", {
-		// 	x: "-100%",
-		// 	opacity: 0,
-		// 	duration: 2,
-		// 	ease: Power3.easeOut,
-		// }).from("#img-1", {
-		// 	x: "200%",
-		// 	// opacity: 0,
-		// 	duration: 2,
-		// 	ease: Power3.easeOut,
-		// },.5)
-		// .from("#img-2", {
-		// 	x: "-200%",
-		// 	// opacity: 0,
-		// 	duration: 2,
-		// 	ease: Power3.easeOut,
-		// },1.5)
-		// .from("#text-2", {
-		// 	x: "200%",
-		// 	// opacity: 0,
-		// 	duration: 2,
-		// 	ease: Power3.easeOut,
-		// },2)
-		// .from("#text-3", {
-		// 	x: "-200%",
-		// 	// opacity: 0,
-		// 	duration: 2,
-		// 	ease: Power3.easeOut,
-		// },2.5)
-		// .from("#img-3", {
-		// 	x: "200%",
-		// 	// opacity: 0,
-		// 	duration: 2,
-		// 	ease: Power3.easeOut,
-		// },3)
-
-	},[tl])
+		return () => window.removeEventListener("scroll",handleScroll)
+	}, [])
 	return (
 		<motion.div className="home__cont" >
 			<motion.div className="home__cont__upper">
 				<motion.div className="home__cont__upper__text">
-					<motion.h1 className="home__cont__upper__text--title" id="teaChain-title">Tea Chain</motion.h1>
-					<motion.h4 className="home__cont__upper__text--content" id="teaChain-cont">
+					<motion.h1 className="home__cont__upper__text--title" style={{transform: `translateY(${offsetY * 0.3}px)`}}>Tea Chain</motion.h1>
+					<motion.h4 className="home__cont__upper__text--content" style={{transform: `translateY(${offsetY * 0.4}px)`}}>
 						A blockchain platform to showcase the journey of tea leaves
 					</motion.h4>
 				</motion.div>
 				<motion.div className="home__cont__upper__imgCont">
-					<motion.img src={TeaGif4} className="home__cont__upper__imgCont--img gif" />
-					<motion.img src={HomeImage} className="home__cont__imgCont--img" />
+					<motion.img src={TeaGif4} className="home__cont__upper__imgCont--img gif" style={{transform: `translateY(${offsetY * 0.4}px)`}}/>
+					<motion.img src={HomeImage} className="home__cont__imgCont--img" style={{transform: `translateY(${offsetY * 0.4}px)`}} />
 				</motion.div>
 			</motion.div>
 			<motion.div className="home__cont__lower">

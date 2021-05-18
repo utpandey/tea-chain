@@ -8,16 +8,16 @@ async function main() {
         deployer.address
     );
 
-    const Greeter = await hre.ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, World!");
+    const Teachain = await hre.ethers.getContractFactory("Teachain");
+    const teachain = await Teachain.deploy();
 
     const Token = await hre.ethers.getContractFactory("Token");
     const token = await Token.deploy();
 
-    await greeter.deployed();
+    await teachain.deployed();
     await token.deployed();
 
-    console.log("Greeter deployed to:", greeter.address);
+    console.log("Greeter deployed to:", teachain.address);
     console.log("Token deployed to:", token.address);
 }
 

@@ -53,8 +53,10 @@ contract Teachain {
         bool isVerified;
     }
 
-    mapping(address => uint256[]) batches;
-    mapping(uint256 => TeaBatch) teaBatches;
+    event BatchCreated(uint256 _batchId);
+
+    mapping(address => uint256[]) public batches;
+    mapping(uint256 => TeaBatch) public teaBatches;
 
     constructor() {
         createBatch();
@@ -121,20 +123,19 @@ contract Teachain {
     /// @return _teaBatches TeaBatch[];
     function getBatches(address _addr) public view returns (TeaBatch[] memory) {
         uint256[] memory batchIds = batches[_addr];
-        TeaBatch[] memory _teaBatches;
+        TeaBatch[] memory _teaBatches = new TeaBatch[](batchIds.length);
         for(uint i = 0; i < batchIds.length; i++) {
             _teaBatches[i] = teaBatches[batchIds[i]];
         }
         return _teaBatches;
     }
 
-    /// @return _id uint256
-    function createBatch() public returns (uint256) {
+    function createBatch() public {
         uint256 _id = rand();
         TeaBatch memory teaBatch;
         teaBatch.batchId = _id;
         teaBatches[_id] = teaBatch;
-        return _id;
+        emit BatchCreated(_id);
     }
 }
 

@@ -11,14 +11,14 @@ async function main() {
     const Teachain = await hre.ethers.getContractFactory("Teachain");
     const teachain = await Teachain.deploy();
 
-    const Token = await hre.ethers.getContractFactory("Token");
-    const token = await Token.deploy();
+    // const Token = await hre.ethers.getContractFactory("Token");
+    // const token = await Token.deploy();
 
     await teachain.deployed();
-    await token.deployed();
+    // await token.deployed();
 
-    console.log("Greeter deployed to:", teachain.address);
-    console.log("Token deployed to:", token.address);
+    console.log("TeaChain deployed to:", teachain.address);
+    // console.log("Token deployed to:", token.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -92,16 +92,22 @@
             padding: 1rem;
             margin: 0rem 5rem 0 5rem;
             border-radius: 5px;
+            margin-bottom: 5rem;
             &__item {
                 display: flex;
-                justify-content: center;
-                align-items: center;
+                flex-direction: column;
+                // justify-content: center;
+                // align-items: center;
                 flex: 0 0 300px;
                 width: 30px;
                 height: 150px;
                 scroll-snap-align: start;
-                background-color: #ccc;
+                background-color: rgb(255, 255, 255);
                 font-size: 1.5rem;
+                border-radius: 1rem;
+                &__title {
+                    font-size: 1rem;
+                }
             }
         }
     }

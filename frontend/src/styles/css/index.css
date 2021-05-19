@@ -520,18 +520,22 @@ html {
   scroll-padding: 1rem;
   padding: 1rem;
   margin: 0rem 5rem 0 5rem;
-  border-radius: 5px; }
+  border-radius: 5px;
+  margin-bottom: 5rem; }
 
 .admin__cont__horizCont__item {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
   flex: 0 0 300px;
   width: 30px;
   height: 150px;
   scroll-snap-align: start;
-  background-color: #ccc;
-  font-size: 1.5rem; }
+  background-color: white;
+  font-size: 1.5rem;
+  border-radius: 1rem; }
+
+.admin__cont__horizCont__item__title {
+  font-size: 1rem; }
 
 .container {
   max-width: 150rem;

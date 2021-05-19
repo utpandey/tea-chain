@@ -15,7 +15,7 @@ interface IUserState {
 };
 
 const initialState: IUserState = {
-  isAuthenticated: false,
+  isAuthenticated: true,
   user: {
     type: '',
     profile: {}

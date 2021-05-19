@@ -1,4 +1,9 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
+
+
+import { AddBatch } from 'src/store/batch';
+import { getBatchStateReducer } from '../store/batch';
 
 interface IBatchesProps {
 	data: any;
@@ -6,18 +11,16 @@ interface IBatchesProps {
 
 const Batches: FC<IBatchesProps> = ({ data }) => {
   const q = parseInt(data[0]._hex, 16)
-  console.log(q);
-	const [ id, setId ] = React.useState(0);
-	// setId(data[0]);
-	for (const val of data) {
-		// console.log(val[val.length-1])
-	}
-	// for(let i = 0; i < data.length; i++) {
-	console.log(data);
-	// }
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    console.log(data)
+    dispatch(AddBatch({batchData: data}))
+  }
 	return (
 		<div className="box1">
-      <h1 className="box1__title">{q}</h1>
+      <h1 className="box1__title"
+        onClick={handleClick}
+      >{q}</h1>
       <div className="box1__item">
       {/* {data.map((batchData: any, key: any) => (
            <BatchComponent batchData={batchData} key={key} />
@@ -28,7 +31,7 @@ const Batches: FC<IBatchesProps> = ({ data }) => {
             // if (batchData[batchData.length -1]) {
           return <BatchComponent batchData={batchData} key={key} />
         }
-      })}
+    })}
       </div>
       
 		</div>
@@ -42,7 +45,7 @@ interface IBatchComponentProps {
 }
 
 const BatchComponent: FC<IBatchComponentProps> = ({ batchData}) => {
-  console.log(batchData[batchData.length-1])
+  // console.log(batchData[2])
 	// console.log(batchData[batchData.length-1])
   // console.log(id)
   // for (let i = 0; i < id.length; i++) {

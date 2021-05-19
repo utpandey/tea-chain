@@ -32,9 +32,9 @@ const updatePasswordValidationRules = () => [
 const registerValidationRules = () => [
   body('email').isEmail(),
   body('password').isHash('md5'),
-  body('type').isIn(['Producer', 'Farmer']),
+  body('type').isIn(['Farmer', 'Manufacturer', 'Wholesaler', 'Distributer', 'Retailer']),
   body('profile.name').isString(),
-  body('profile.picture').optional().isBase64(),
+  body('profile.picture').optional().isString(),
 ];
 
 // eslint-disable-next-line consistent-return

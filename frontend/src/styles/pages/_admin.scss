@@ -1,0 +1,69 @@
+.admin {
+    &__cont {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(221, 215, 215);
+        &__title {
+            font-size: 2.5rem;
+            margin-left: 5rem;
+        }
+        &__infoCont {
+            display: flex;
+            flex-direction: row;
+            &__rolesCont {
+                flex-direction: column;
+                background-color: #fff;
+                padding: 2rem;
+                margin: 5rem;
+                border-radius: 1rem;
+                box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
+                -webkit-box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
+                -moz-box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
+                &__title {
+                    font-size: 2rem;
+                    text-align: left;
+                    color: black;
+                }
+                &__content {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    &__img {
+                        width: 20%;
+                    }
+                    &__value {
+                        color: #A3008C;
+                    }
+                }
+            }
+        }
+        &__batchCont {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            margin: 5rem;
+            &__header {
+                display: flex;
+                justify-content: space-between;
+                padding: 1rem 2rem 1rem 2rem;
+                &__title {
+                    color: black;
+                }
+                &__btn {
+                    color: #c299bc;
+                    background-color: #fff;
+                    border-radius: 10rem;
+                    border: 1px solid #b697b2;
+                    cursor: pointer;
+                    padding: 0 2rem 0 2rem;
+                    transition: all .5s;
+                    &:hover {
+                        box-shadow: 3px 5px 8px -1px rgba(0, 0, 0, 0.75);
+                        -webkit-box-shadow: 3px 5px 8px -1px rgba(0, 0, 0, 0.75);
+                        -moz-box-shadow: 3px 5px 8px -1px rgba(0, 0, 0, 0.75);
+                    }
+                }
+            }
+        }
+    }
+}

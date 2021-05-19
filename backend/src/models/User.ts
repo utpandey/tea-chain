@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import EmailServices from '../services/EmailServices';
 import serverConfig from '../config';
 import { IUser } from '../types/User';
+import logger from '../config/logger';
 
 const UserSchema = new mongoose.Schema<IUser>({
   email: { type: String, unique: true },
@@ -43,9 +44,10 @@ UserSchema.method('comparePassword', function comparePassword(password: string):
         return reject(err);
       }
       if (isMatch) {
+        logger.info('UPS', 'comparePassword', this);
         return resolve({
-          email: this.email,
           type: this.type,
+          profile: this.profile,
         });
       }
       return resolve({});

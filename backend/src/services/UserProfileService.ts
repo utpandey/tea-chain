@@ -29,8 +29,8 @@ const createUser = async (params: UserSignup) => {
     .then((res) => {
       res.sendRegistrationMail();
       return {
-        email: res.email,
         type: res.type,
+        profile: res.profile,
       };
     })
     .catch((err) => {
@@ -52,7 +52,6 @@ const updatePassword = async (params: ForgotPassword) => {
     throw new Error('User doesn\'t exist');
   }
   return result.updatePassword(params.resetToken, params.password).then((res) => ({
-    email: res.email,
     type: res.type,
   })).catch((err) => {
     throw err;

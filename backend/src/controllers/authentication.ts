@@ -75,7 +75,7 @@ const updatePassword = async (req: Request, res: Response) => {
 const login = async (req: Request, res: Response) => {
   try {
     const result = await UserProfileServices.login(req.body);
-    if (result.email && result.email.length > 3) {
+    if (result.type && result.type.length > 3) {
       res.status(200).json({
         result: true,
         user: result,

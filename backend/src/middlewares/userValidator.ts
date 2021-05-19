@@ -33,6 +33,8 @@ const registerValidationRules = () => [
   body('email').isEmail(),
   body('password').isHash('md5'),
   body('type').isIn(['Producer', 'Farmer']),
+  body('profile.name').isString(),
+  body('profile.picture').optional().isBase64(),
 ];
 
 // eslint-disable-next-line consistent-return

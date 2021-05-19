@@ -8,6 +8,10 @@ export interface IUser extends Document {
   passwordResetExpires: Date,
   emailVerificationToken: string,
   emailVerified: boolean,
+  profile: {
+    name: String,
+    picture?: String,
+  },
   // eslint-disable-next-line no-unused-vars
   comparePassword(password: string): Promise<Partial<IUser>>;
   // eslint-disable-next-line no-unused-vars
@@ -21,6 +25,10 @@ export interface UserSignup {
   email: string,
   password: string,
   type: string,
+  profile: {
+    name: string,
+    picture: string,
+  }
 }
 
 export interface UserSignin {

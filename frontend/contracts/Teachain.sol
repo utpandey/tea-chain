@@ -71,7 +71,7 @@ contract Teachain {
     /// @param _harvestingDate uint256;
     /// @param _flushNumber uint8;
     function updateFarmerEntry(uint256 _batchId, address _addr, string memory _farmerName, string memory _teaSpecies, string memory _teaLocation, uint256 _harvestingDate, uint8 _flushNumber) public {
-        FarmerEntry memory _farmerEntry = FarmerEntry(_addr, _farmerName, _teaSpecies, _teaLocation, _harvestingDate, _flushNumber, false); 
+        FarmerEntry memory _farmerEntry = FarmerEntry(_addr, _farmerName, _teaSpecies, _teaLocation, _harvestingDate, _flushNumber, true); 
         teaBatches[_batchId].farmerEntry = _farmerEntry;
         batches[_addr].push(_batchId);
     }
@@ -83,7 +83,7 @@ contract Teachain {
     /// @param _receivingDate uint256;
     /// @param _witheringDuration uint256;
     function updateManufcturerEntry(uint256 _batchId, address _addr, string memory _manufacturerName, string memory _teaType, uint256 _receivingDate, uint256 _witheringDuration) public {
-        ManufacturerEntry memory _manufacturerEntry = ManufacturerEntry(_addr, _manufacturerName, _teaType, _receivingDate, _witheringDuration, false); 
+        ManufacturerEntry memory _manufacturerEntry = ManufacturerEntry(_addr, _manufacturerName, _teaType, _receivingDate, _witheringDuration, true); 
         teaBatches[_batchId].manufacturerEntry = _manufacturerEntry;
         batches[_addr].push(_batchId);
     }
@@ -93,7 +93,7 @@ contract Teachain {
     /// @param _wholesalerName string;
     /// @param _receivingDate uint256;
     function updateWholesalerEntry(uint256 _batchId, address _addr, string memory _wholesalerName, uint256 _receivingDate) public {
-        WholesalerEntry memory _wholesalerEntry = WholesalerEntry(_addr, _wholesalerName, _receivingDate, false); 
+        WholesalerEntry memory _wholesalerEntry = WholesalerEntry(_addr, _wholesalerName, _receivingDate, true); 
         teaBatches[_batchId].wholesalerEntry = _wholesalerEntry;
         batches[_addr].push(_batchId);
     }
@@ -104,7 +104,7 @@ contract Teachain {
     /// @param _receivingDate uint256;
     /// @param _storageTemperature uint32;
     function updateDistributerEntry(uint256 _batchId, address _addr, string memory _distributerName, uint256 _receivingDate, uint32 _storageTemperature) public {
-        DistributerEntry memory _distributerEntry = DistributerEntry(_addr, _distributerName, _receivingDate, _storageTemperature, false); 
+        DistributerEntry memory _distributerEntry = DistributerEntry(_addr, _distributerName, _receivingDate, _storageTemperature, true); 
         teaBatches[_batchId].distributerEntry = _distributerEntry;
         batches[_addr].push(_batchId);
     }
@@ -114,7 +114,7 @@ contract Teachain {
     /// @param _retailerName string;
     /// @param _receivingDate uint256;
     function updateRetailerEntry(uint256 _batchId, address _addr, string memory _retailerName, uint256 _receivingDate) public {
-        RetailerEntry memory _retailerEntry = RetailerEntry(_addr, _retailerName, _receivingDate, false); 
+        RetailerEntry memory _retailerEntry = RetailerEntry(_addr, _retailerName, _receivingDate, true); 
         teaBatches[_batchId].retailerEntry = _retailerEntry;
         batches[_addr].push(_batchId);
     }

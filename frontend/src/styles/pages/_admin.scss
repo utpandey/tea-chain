@@ -16,9 +16,7 @@
                 padding: 2rem;
                 margin: 5rem;
                 border-radius: 1rem;
-                box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
-                -webkit-box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
-                -moz-box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
+                box-shadow: 0 3px 10px 0 rgba(#000, 0.1);
                 &__title {
                     font-size: 2rem;
                     text-align: left;
@@ -43,6 +41,7 @@
             background-color: #fff;
             margin: 5rem;
             border-radius: 1rem;
+            box-shadow: 0 3px 10px 0 rgba(#000, 0.1);
             &__header {
                 display: flex;
                 justify-content: space-between;
@@ -73,24 +72,45 @@
                     flex-direction: row;
                     justify-content: space-evenly;
                 }
+                &__table {
+                    // justify-content: space-evenly;
+                    // display: flex;
+                    margin: 5rem 0rem 0 0rem;
+                }
             }
-            &__table {
-                justify-content: space-evenly;
-                &__column {
-                    display: flex;
-                }
-                &__row {
-                    display: flex;
-                }
+        }
+        &__horizCont {
+            // white-space: nowrap;
+            display: flex;
+            gap: 20px;
+            // max-width: 90%;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            box-shadow: 0 3px 10px 0 rgba(#000, 0.1);
+            -webkit-overflow-scrolling: touch;
+            scroll-padding: 1rem;
+            padding: 1rem;
+            margin: 0rem 5rem 0 5rem;
+            border-radius: 5px;
+            &__item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex: 0 0 300px;
+                width: 30px;
+                height: 150px;
+                scroll-snap-align: start;
+                background-color: #ccc;
+                font-size: 1.5rem;
             }
         }
     }
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 0.5fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas: ". . . . . ." ". . . . . ." ". . . . . .";
-}
+// .grid-container {
+//     display: grid;
+//     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+//     grid-template-rows: 0.5fr 1fr 1fr;
+//     gap: 0px 0px;
+//     grid-template-areas: ". . . . . ." ". . . . . ." ". . . . . .";
+// }

@@ -450,9 +450,7 @@ html {
   padding: 2rem;
   margin: 5rem;
   border-radius: 1rem;
-  box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: -1px 7px 12px 0px rgba(0, 0, 0, 0.75); }
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1); }
 
 .admin__cont__infoCont__rolesCont__title {
   font-size: 2rem;
@@ -475,7 +473,8 @@ html {
   flex-direction: column;
   background-color: #fff;
   margin: 5rem;
-  border-radius: 1rem; }
+  border-radius: 1rem;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1); }
 
 .admin__cont__batchCont__header {
   display: flex;
@@ -508,21 +507,31 @@ html {
   flex-direction: row;
   justify-content: space-evenly; }
 
-.admin__cont__batchCont__table {
-  justify-content: space-evenly; }
+.admin__cont__batchCont__content__table {
+  margin: 5rem 0rem 0 0rem; }
 
-.admin__cont__batchCont__table__column {
-  display: flex; }
+.admin__cont__horizCont {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+  -webkit-overflow-scrolling: touch;
+  scroll-padding: 1rem;
+  padding: 1rem;
+  margin: 0rem 5rem 0 5rem;
+  border-radius: 5px; }
 
-.admin__cont__batchCont__table__row {
-  display: flex; }
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0.5fr 1fr 1fr;
-  gap: 0px 0px;
-  grid-template-areas: ". . . . . ." ". . . . . ." ". . . . . ."; }
+.admin__cont__horizCont__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 300px;
+  width: 30px;
+  height: 150px;
+  scroll-snap-align: start;
+  background-color: #ccc;
+  font-size: 1.5rem; }
 
 .container {
   max-width: 150rem;
@@ -619,6 +628,42 @@ html {
   visibility: visible;
   -webkit-transform: scaleX(1);
   transform: scaleX(1); }
+
+.box1 {
+  display: flex;
+  flex-direction: row;
+  padding: 3rem 0 3rem 10rem; }
+
+.box1__title {
+  color: black;
+  cursor: pointer; }
+
+.box1__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-left: 7rem; }
+
+.box2 {
+  display: flex;
+  flex-direction: row; }
+
+.box2__title1 {
+  color: white;
+  border-radius: 10rem;
+  padding: 1rem 3rem 1rem 3rem;
+  border: none;
+  pointer-events: none;
+  background-color: green; }
+
+.box2__title2 {
+  color: white;
+  border-radius: 10rem;
+  padding: 1rem 3rem 1rem 3rem;
+  border: none;
+  pointer-events: none;
+  background-color: red; }
 
 .footer__cont {
   background-color: var(--color-primary-4);

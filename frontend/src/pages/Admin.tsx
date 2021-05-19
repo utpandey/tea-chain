@@ -157,7 +157,7 @@ const Admin: FC = () => {
 					<h1 className="admin__cont__batchCont__header__title">BATCHES OVERVIEW</h1>
 					<button className="admin__cont__batchCont__header__btn">Create Button</button>
 				</div>
-				<hr />
+        <hr />
         <div className="admin__cont__batchCont__content" style={{ display: 'flex', flexDirection: 'column' }}>
           <div className="admin__cont__batchCont__content__header">
             <h1 className="admin__cont__batchCont__content__header__text">Batch ID</h1>
@@ -168,17 +168,35 @@ const Admin: FC = () => {
             <h1 className="admin__cont__batchCont__content__header__text">Retailer</h1>
           </div>
           <div className="admin__cont__batchCont__content__table">
+            <hr />
           {teachain.length > 0 &&
 						teachain.map((data: any, key: any) => (
 							<Batches data={data} key={key} />
-            ))}
+            ))}           
           </div>
 				</div>
-			</div>
+      </div>
+      <div className="admin__cont__horizCont">
+        <div className="admin__cont__horizCont__item">
+          sadsad
+        </div>
+        <div className="admin__cont__horizCont__item">
+          sadsad
+        </div>
+        <div className="admin__cont__horizCont__item">
+          sadsad
+        </div>
+        <div className="admin__cont__horizCont__item">
+          sadsad
+        </div>
+        <div className="admin__cont__horizCont__item">
+          sadsad
+        </div>
+      </div>
 			<button onClick={setTeachain}>Click</button>
-			<button onClick={fetchTeachain}>Click</button>
+			{/* <button onClick={fetchTeachain}>Click</button>
 			<button onClick={updateManufcturerEntry}>Click</button>
-			<button onClick={updateWholesalerEntry}>Click</button>
+			<button onClick={updateWholesalerEntry}>Click</button> */}
 		</div>
 	);
 };

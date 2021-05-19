@@ -2,6 +2,8 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserStateReducer, LOGOUT } from 'src/store/auth';
 
 // const svgVariants = {
 // 	hidden: { rotate: -180 },
@@ -27,6 +29,13 @@ import { withRouter } from 'react-router';
 // }
 
 const Header = () => {
+	const isAuthenticated = useSelector(getUserStateReducer);
+	const dispatch = useDispatch();
+
+	const logout =()=> {
+		dispatch(LOGOUT());
+	}
+
 	return (
 		<motion.div className="header__cont">
 			{/* initial={{y:-250}}
@@ -57,20 +66,31 @@ const Header = () => {
 					</motion.svg>
 				</motion.div>
 			</Link>
-			<motion.div className="header__cont__title">
-				<Link to="/signin" style={{ textDecoration: 'none' }}>
-					<motion.h1 className="header__cont__title__text">
-						{/* whileHover={{color: 'black',scale: '0.9'}} */}
-						Sign In
-					</motion.h1>
-				</Link>
-				<Link to="/signup" style={{ textDecoration: 'none' }}>
-					<motion.h1 className="header__cont__title__text">
-						{/* whileHover={{color: 'black',scale: '0.9'}} */}
-						Sign Up
-					</motion.h1>
-				</Link>
-			</motion.div>
+			{
+				isAuthenticated ?
+					(
+						<div className="header__cont__title" onClick={logout}>
+							<h1 className="header__cont__title__text">
+								Logout
+							</h1>
+						</div>
+					) : (
+						<motion.div className="header__cont__title">
+							<Link to="/signin" style={{ textDecoration: 'none' }}>
+								<motion.h1 className="header__cont__title__text">
+									{/* whileHover={{color: 'black',scale: '0.9'}} */}
+									Sign In
+								</motion.h1>
+							</Link>
+							<Link to="/signup" style={{ textDecoration: 'none' }}>
+								<motion.h1 className="header__cont__title__text">
+									{/* whileHover={{color: 'black',scale: '0.9'}} */}
+									Sign Up
+								</motion.h1>
+							</Link>
+						</motion.div>
+					)
+			}
 		</motion.div>
 	);
 };

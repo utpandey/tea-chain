@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap, TimelineLite, Power3 } from 'gsap';
+import { useDispatch } from 'react-redux';
 
 import signin1 from '../assets/signin1.png';
 import signin2 from '../assets/signin2.png';
+import { LOGIN } from 'src/store/auth';
 
 const Signin = () => {
 	const tlite = new TimelineLite({ delay: 0.3 });
+	const dispatch = useDispatch();
 
 	const [ { email, password }, setCredentials ] = useState({
 		email: '',
@@ -52,6 +55,10 @@ const Signin = () => {
 	// 	}
 	// };
 
+	const handleSignin =()=> {
+		dispatch(LOGIN({name: 'test', picture: '123'}));
+	}
+
 	return (
 		<div className="signup__cont">
 			<div className="signup__cont__left">
@@ -84,7 +91,7 @@ const Signin = () => {
 					</Link>
 				</p>
 
-				<button className="signup__cont__left__submitBtn">
+				<button onClick={handleSignin} className="signup__cont__left__submitBtn">
 					Continue <span>&#10148;</span>
 				</button>
 				<p className="signup__cont__left__msg">

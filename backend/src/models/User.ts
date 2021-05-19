@@ -15,8 +15,6 @@ const UserSchema = new mongoose.Schema<IUser>({
   emailVerified: Boolean,
   profile: {
     name: String,
-    gender: String,
-    location: String,
     picture: String,
   },
 }, { timestamps: true });

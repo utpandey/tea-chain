@@ -474,7 +474,8 @@ html {
   display: flex;
   flex-direction: column;
   background-color: #fff;
-  margin: 5rem; }
+  margin: 5rem;
+  border-radius: 1rem; }
 
 .admin__cont__batchCont__header {
   display: flex;
@@ -497,6 +498,31 @@ html {
   box-shadow: 3px 5px 8px -1px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 3px 5px 8px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 3px 5px 8px -1px rgba(0, 0, 0, 0.75); }
+
+.admin__cont__batchCont__content {
+  display: flex;
+  flex-direction: column; }
+
+.admin__cont__batchCont__content__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly; }
+
+.admin__cont__batchCont__table {
+  justify-content: space-evenly; }
+
+.admin__cont__batchCont__table__column {
+  display: flex; }
+
+.admin__cont__batchCont__table__row {
+  display: flex; }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas: ". . . . . ." ". . . . . ." ". . . . . ."; }
 
 .container {
   max-width: 150rem;

@@ -42,6 +42,7 @@
             flex-direction: column;
             background-color: #fff;
             margin: 5rem;
+            border-radius: 1rem;
             &__header {
                 display: flex;
                 justify-content: space-between;
@@ -64,6 +65,32 @@
                     }
                 }
             }
+            &__content {
+                display: flex;
+                flex-direction: column;
+                &__header {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-evenly;
+                }
+            }
+            &__table {
+                justify-content: space-evenly;
+                &__column {
+                    display: flex;
+                }
+                &__row {
+                    display: flex;
+                }
+            }
         }
     }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas: ". . . . . ." ". . . . . ." ". . . . . .";
 }

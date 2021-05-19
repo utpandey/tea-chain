@@ -3,6 +3,9 @@ import { ethers } from 'ethers'
 
 import Teachain from '../artifacts/contracts/Teachain.sol/Teachain.json'
 
+import user from '../assets/user.svg'
+import document from '../assets/document.svg'
+
 declare global {
   /* tslint:disable */
   interface Window {
@@ -32,6 +35,10 @@ const Admin: FC = () => {
         const data = await contract.functions.getBatches('0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266')
         console.log('data:', data)
         setTeachainValue(data)
+        console.log('bigN' + data[0][0][2][3].toString())
+        let a = data[0][0][2][3].toNumber()
+        console.log(new Date(a)) 
+        console.log(a)
       } catch (err) {
         console.log('Error: ',err)
       }
@@ -56,11 +63,69 @@ const Admin: FC = () => {
       // fetchTeachain()
     }
   }
+
+  async function updateManufcturerEntry() {
+    // if (!teachain) return
+    if (typeof window.ethereum !== 'undefined') {
+      await requestAccount()
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner()
+      const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
+      // const transaction = await contract.functions.createBatch()
+      const transactionTwo = await contract.functions.updateManufcturerEntry(596, '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', 'Jill', "Green Tea", Math.round(((new Date()).getTime())), "16");
+      await transactionTwo.wait();
+      console.log(transactionTwo)
+      // fetchTeachain()
+    }
+  }
+
+  async function updateWholesalerEntry() {
+    // if (!teachain) return
+    if (typeof window.ethereum !== 'undefined') {
+      await requestAccount()
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner()
+      const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
+      // const transaction = await contract.functions.createBatch()
+      const transactionTwo = await contract.functions.updateWholesalerEntry(596, '0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC', 'Jerry', Math.round(((new Date()).getTime())/10000));
+      await transactionTwo.wait();
+      console.log(transactionTwo)
+      // fetchTeachain()
+    }
+  }
+
   return (
-    <div className="">
-      Admin
-      <button onClick={setTeachain}>Click</button>
+    <div className="admin__cont">
+      <h1 className="admin__cont__title">Dashboard</h1>
+      <hr />
+      <div className="admin__cont__infoCont">
+        <div className="admin__cont__infoCont__rolesCont">
+          <h1 className="admin__cont__infoCont__rolesCont__title">Total Roles</h1>
+          <div className="admin__cont__infoCont__rolesCont__content">
+            <img src={user} alt="" className="admin__cont__infoCont__rolesCont__content__img" />
+            <h1 className="admin__cont__infoCont__rolesCont__content__value">5</h1>
+          </div>
+        </div>
+        <div className="admin__cont__infoCont__rolesCont">
+          <h1 className="admin__cont__infoCont__rolesCont__title">Total Batches</h1>
+          <div className="admin__cont__infoCont__rolesCont__content">
+            <img src={document} alt="" className="admin__cont__infoCont__rolesCont__content__img" />
+            <h1 className="admin__cont__infoCont__rolesCont__content__value">5</h1>
+          </div>
+        </div>
+      </div>
+      <div className="admin__cont__batchCont">
+        <div className="admin__cont__batchCont__header">
+          <h1 className="admin__cont__batchCont__header__title">BATCHES OVERVIEW</h1>
+          <button className="admin__cont__batchCont__header__btn">Create Button</button>
+        </div>
+        <hr />
+        .admin__cont__batchCont__
+      </div>
+      {/* <button onClick={setTeachain}>Click</button>
       <button onClick={fetchTeachain}>Click</button>
+      <button onClick={updateManufcturerEntry}>Click</button>
+      <button onClick={updateWholesalerEntry}>Click</button> */}
       </div>
     );
 }

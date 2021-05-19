@@ -13,7 +13,7 @@ const Batches: FC<IBatchesProps> = ({ data }) => {
 		// console.log(val[val.length-1])
 	}
 	// for(let i = 0; i < data.length; i++) {
-	// console.log(id);
+	console.log(data);
 	// }
 	return (
 		<div className="box1">

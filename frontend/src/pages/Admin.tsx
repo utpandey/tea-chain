@@ -26,9 +26,10 @@ const Admin: FC = () => {
   async function fetchTeachain() {
     if (typeof window.ethereum !== 'undefined') {
       const provider = new ethers.providers.Web3Provider(window.ethereum)
-      const contract = new ethers.Contract(teachainAddress,Teachain.abi,provider)
+      const contract = new ethers.Contract(teachainAddress, Teachain.abi, provider)
+      console.log(contract)
       try {
-        const data = await contract.functions.getBatches('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266')
+        const data = await contract.functions.getBatches('0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266')
         console.log('data:', data)
         setTeachainValue(data)
       } catch (err) {
@@ -45,13 +46,20 @@ const Admin: FC = () => {
       const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
       const transaction = await contract.functions.createBatch()
       await transaction.wait()
+      contract.on('BatchCreated', async (res) => {
+        const num = res.toNumber();
+        const transactionTwo = await contract.functions.updateFarmerEntry(num, '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266', 'Jack', "Camellia sinensis", "Darjeeling", Math.round(((new Date()).getTime())/10000), 1);
+        await transactionTwo.wait();
+
+      })
+      console.log(transaction)
       // fetchTeachain()
     }
   }
   return (
     <div className="">
       Admin
-      <button onClick={setTeachain}>Click</button> 
+      <button onClick={setTeachain}>Click</button>
       <button onClick={fetchTeachain}>Click</button>
       </div>
     );

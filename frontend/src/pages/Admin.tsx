@@ -180,9 +180,9 @@ const Admin: FC = () => {
 				</div>
       </div>
       <div className="admin__cont__horizCont">
-        {batchState ? batchState.map((data: any, key: any) => {
+        {batchState ? batchState.map((data: any, index: any) => {
           if (data.length > 2) {
-            return <Role data={data} key={key}/>  
+						return <Role data={data} index={index} key={index}/>
           }
         }) : null}
 			</div>

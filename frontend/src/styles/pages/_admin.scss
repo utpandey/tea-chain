@@ -99,14 +99,19 @@
                 // justify-content: center;
                 // align-items: center;
                 flex: 0 0 300px;
-                width: 30px;
-                height: 150px;
+                width: auto;
+                height: auto;
                 scroll-snap-align: start;
                 background-color: rgb(255, 255, 255);
                 font-size: 1.5rem;
                 border-radius: 1rem;
+                padding: 2rem;
+                &__header {
+                    font-size: 2rem;
+                    color: #000;
+                }
                 &__title {
-                    font-size: 1rem;
+                    font-size: 1.5rem;
                 }
             }
         }

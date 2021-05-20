@@ -527,15 +527,20 @@ html {
   display: flex;
   flex-direction: column;
   flex: 0 0 300px;
-  width: 30px;
-  height: 150px;
+  width: auto;
+  height: auto;
   scroll-snap-align: start;
   background-color: white;
   font-size: 1.5rem;
-  border-radius: 1rem; }
+  border-radius: 1rem;
+  padding: 2rem; }
+
+.admin__cont__horizCont__item__header {
+  font-size: 2rem;
+  color: #000; }
 
 .admin__cont__horizCont__item__title {
-  font-size: 1rem; }
+  font-size: 1.5rem; }
 
 .container {
   max-width: 150rem;

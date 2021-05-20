@@ -764,7 +764,7 @@ html {
   background: -webkit-linear-gradient(left, #EE9999 0%, #D44529 100%);
   display: block;
   height: 5px;
-  width: 50%;
+  width: 100%;
   position: absolute; }
 
 .modal__cont__inputCont__input {

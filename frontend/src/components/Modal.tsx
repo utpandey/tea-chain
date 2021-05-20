@@ -8,11 +8,12 @@ import { eventNames } from 'node:process';
 interface IModalProps {
 	showModal: any;
 	setModal: any;
+	fetchTeachain: any;
 }
 
 const teachainAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
-export const Modal: FC<IModalProps> = ({ showModal, setModal }) => {
+export const Modal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) => {
 	const [ batchId, setBatchId ] = useState('');
 	const [ address, setAddress ] = useState('');
 	const [ name, setName ] = useState('');
@@ -37,21 +38,21 @@ export const Modal: FC<IModalProps> = ({ showModal, setModal }) => {
 			const transaction = await contract.functions.createBatch();
 			await transaction.wait();
 			contract.on('BatchCreated', async (res) => {
-				// const num = res.toNumber();
+				const num = res.toNumber();
 				const transactionTwo = await contract.functions.updateFarmerEntry(
-					batchId,
+					num,
 					address,
 					name,
 					teaSpecies,
 					location,
-					// Math.round(new Date().getTime() / 10000),
-          date,
+					Math.round(new Date().getTime() / 10000),
 					flush
 				);
 				await transactionTwo.wait();
+				fetchTeachain()
+				setModal(false)
 			});
 			console.log(transaction);
-			// fetchTeachain()
 		}
 	}
 
@@ -150,7 +151,7 @@ export const Modal: FC<IModalProps> = ({ showModal, setModal }) => {
 						>
 							<form onSubmit={setTeachain} className="modal__cont">
 								<h1 className="modal__cont__title">Batch Details</h1>
-								<div className="modal__cont__inputCont">
+								{/* <div className="modal__cont__inputCont">
 									<input
 										type="text"
                     name="batchId"
@@ -162,7 +163,7 @@ export const Modal: FC<IModalProps> = ({ showModal, setModal }) => {
 										required={true}
 										placeholder="Batch ID"
 									/>
-								</div>
+								</div> */}
 								<div className="modal__cont__inputCont">
 									<input
 										type="text"

@@ -39,7 +39,7 @@ const Admin: FC = () => {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const contract = new ethers.Contract(teachainAddress, Teachain.abi, provider);
       try {
-        const data = await contract.functions.getBatches('0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266');
+        const data = await contract.functions.getBatches('0x2546BcD3c84621e976D8185a91A922aE77ECEc30');
         const response = await data[0];
         setTeachainValue(response);
 
@@ -186,7 +186,7 @@ const Admin: FC = () => {
           }
         }) : null}
 			</div>
-			<Modal showModal={showModal} setModal={setModal}/>
+			<Modal showModal={showModal} setModal={setModal} fetchTeachain={fetchTeachain} />
 			{/* <button onClick={fetchTeachain}>Click</button>
 			<button onClick={updateManufcturerEntry}>Click</button>
 			<button onClick={updateWholesalerEntry}>Click</button> */}

@@ -1,8 +1,9 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC,useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { useSelector } from 'react-redux';
 
 import Role from '../components/Role';
+import { Modal } from '../components/Modal';
 import Teachain from '../artifacts/contracts/Teachain.sol/Teachain.json';
 import { getBatchStateReducer } from '../store/batch';
 
@@ -22,7 +23,8 @@ const teachainAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 const Admin: FC = () => {
 	const [ teachain, setTeachainValue ] = useState<any>([]);
 	const [ batchNo, setBatchNo ] = useState<any>();
-  const batchState = useSelector(getBatchStateReducer);
+	const batchState = useSelector(getBatchStateReducer);
+	const [showModal, setModal] = useState<boolean>(false);
   console.log(batchState)
 	useEffect(() => {
 		fetchTeachain();
@@ -72,19 +74,19 @@ const Admin: FC = () => {
 			const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
 			const transaction = await contract.functions.createBatch();
 			await transaction.wait();
-			// contract.on('BatchCreated', async (res) => {
-			// 	const num = res.toNumber();
-			// 	const transactionTwo = await contract.functions.updateFarmerEntry(
-			// 		num,
-			// 		'0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
-			// 		'Jack',
-			// 		'Camellia sinensis',
-			// 		'Darjeeling',
-			// 		Math.round(new Date().getTime() / 10000),
-			// 		1
-			// 	);
-				// await transactionTwo.wait();
-			// });
+			contract.on('BatchCreated', async (res) => {
+				const num = res.toNumber();
+				const transactionTwo = await contract.functions.updateFarmerEntry(
+					num,
+					'0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266',
+					'Jack',
+					'Camellia sinensis',
+					'Darjeeling',
+					Math.round(new Date().getTime() / 10000),
+					1
+				);
+				await transactionTwo.wait();
+			});
 			console.log(transaction);
 			// fetchTeachain()
 		}
@@ -155,7 +157,8 @@ const Admin: FC = () => {
 			<div className="admin__cont__batchCont">
 				<div className="admin__cont__batchCont__header">
 					<h1 className="admin__cont__batchCont__header__title">BATCHES OVERVIEW</h1>
-          <button className="admin__cont__batchCont__header__btn" onClick={setTeachain}>Create Batch</button>
+					{/* // @ts-ignore */}
+          <button className="admin__cont__batchCont__header__btn" onClick={() => setModal(prevValue => !prevValue)}>Create Batch</button>
 				</div>
         <hr />
         <div className="admin__cont__batchCont__content" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -182,7 +185,8 @@ const Admin: FC = () => {
             return <Role data={data} key={key}/>  
           }
         }) : null}
-      </div>
+			</div>
+			<Modal showModal={showModal} setModal={setModal}/>
 			{/* <button onClick={fetchTeachain}>Click</button>
 			<button onClick={updateManufcturerEntry}>Click</button>
 			<button onClick={updateWholesalerEntry}>Click</button> */}

@@ -37,4 +37,12 @@
         background-color: red;
         // font-size: 1.5rem;
     }
+    &__title3 {
+        color: white;
+        border-radius: 10rem;
+        padding: 1rem 3rem 1rem 3rem;
+        border: none;
+        pointer-events: none;
+        background-color: orange;
+    }
 }

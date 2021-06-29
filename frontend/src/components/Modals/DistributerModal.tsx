@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { ethers } from 'ethers';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import Teachain from '../artifacts/contracts/Teachain.sol/Teachain.json';
+import Teachain from '../../artifacts/contracts/Teachain.sol/Teachain.json';
 import { eventNames } from 'node:process';
 
 interface IModalProps {
@@ -13,23 +13,21 @@ interface IModalProps {
 
 const teachainAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
-export const Modal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) => {
+export const DistributerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) => {
 	const [ batchId, setBatchId ] = useState('');
 	const [ address, setAddress ] = useState('');
 	const [ name, setName ] = useState('');
-	const [ teaSpecies, setTeaSpecies ] = useState('');
-	const [ location, setLocation ] = useState('');
 	const [ date, setDate ] = useState('');
-	const [ flush, setFlush ] = useState('');
+	const [ temp, setTemp ] = useState('');
 	// console.log('modalopens');
 
 	async function requestAccount() {
 		await window.ethereum.request({ method: 'eth_requestAccounts' });
 	}
 
-	async function setTeachain(event:React.FormEvent) {
+	async function setTeachain(event: React.FormEvent) {
 		// if (!teachain) return
-    event.preventDefault();
+		event.preventDefault();
 		if (typeof window.ethereum !== 'undefined') {
 			await requestAccount();
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -38,53 +36,20 @@ export const Modal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) =
 			const transaction = await contract.functions.createBatch();
 			await transaction.wait();
 			contract.on('BatchCreated', async (res) => {
-				const num = res.toNumber();
-				const transactionTwo = await contract.functions.updateFarmerEntry(
-					num,
+				const transactionTwo = await contract.functions.updateDistributerEntry(
+					batchId,
 					address,
 					name,
-					teaSpecies,
-					location,
 					Math.round(new Date().getTime() / 10000),
-					flush
+					temp
 				);
 				await transactionTwo.wait();
-				fetchTeachain()
-				setModal(false)
+				fetchTeachain();
+				setModal(false);
 			});
 			console.log(transaction);
 		}
 	}
-
-	// const batchChange = (event: any) => {
-	// 	setBatchId(event.target.value);
-	// 	console.log(batchId);
-	// };
-	// const addressChange = (event: any) => {
-  //   setAddress(event.target.value);
-  //   console.log(batchId);
-	// 	console.log(address);
-	// };
-	// const nameChange = (event: any) => {
-	// 	setName(event.target.value);
-	// 	console.log(name);
-	// };
-	// const teaSpeciesChange = (event: any) => {
-	// 	setTeaSpecies(event.target.value);
-	// 	console.log(teaSpecies);
-	// };
-	// const teaLocationChange = (event: any) => {
-	// 	setLocation(event.target.value);
-	// 	console.log(location);
-	// };
-	// const dateChange = (event: any) => {
-	// 	setDate(event.target.value);
-	// 	console.log(date);
-	// };
-	// const flushChange = (event: any) => {
-	// 	setFlush(event.target.value);
-	// 	console.log(flush);
-	// };
 
 	return (
 		<AnimatePresence>
@@ -151,11 +116,11 @@ export const Modal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) =
 						>
 							<form onSubmit={setTeachain} className="modal__cont">
 								<h1 className="modal__cont__title">Batch Details</h1>
-								{/* <div className="modal__cont__inputCont">
+								<div className="modal__cont__inputCont">
 									<input
 										type="text"
-                    name="batchId"
-                    // value={batchId}
+										name="batchId"
+										// value={batchId}
 										onChange={(e) => setBatchId(e.target.value)}
 										// onChange={(e)=> setBatchId({...{batchId}, batchId: e.target.value})}
 										id="batchId"
@@ -163,12 +128,12 @@ export const Modal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) =
 										required={true}
 										placeholder="Batch ID"
 									/>
-								</div> */}
+								</div>
 								<div className="modal__cont__inputCont">
 									<input
 										type="text"
 										name="address"
-                    onChange={(e) => setAddress(e.target.value)}
+										onChange={(e) => setAddress(e.target.value)}
 										id="address"
 										className="modal__cont__inputCont__input"
 										required={true}
@@ -179,55 +144,33 @@ export const Modal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) =
 									<input
 										type="text"
 										name="name"
-											onChange={(e) => setName(e.target.value)}
+										onChange={(e) => setName(e.target.value)}
 										id="name"
 										className="modal__cont__inputCont__input"
 										required={true}
-										placeholder="Farmer Name"
-									/>
-								</div>
-								<div className="modal__cont__inputCont">
-									<input
-										type="text"
-										name="species"
-											onChange={(e) => setTeaSpecies(e.target.value)}
-										id="species"
-										className="modal__cont__inputCont__input"
-										required={true}
-										placeholder="Tea Species"
-									/>
-								</div>
-								<div className="modal__cont__inputCont">
-									<input
-										type="text"
-										name="location"
-											onChange={(e) => setLocation(e.target.value)}
-										id="location"
-										className="modal__cont__inputCont__input"
-										required={true}
-										placeholder="Tea Location"
+										placeholder="Distributer Name"
 									/>
 								</div>
 								<div className="modal__cont__inputCont">
 									<input
 										type="text"
 										name="date"
-											onChange={(e) => setDate(e.target.value)}
+										onChange={(e) => setDate(e.target.value)}
 										id="date"
 										className="modal__cont__inputCont__input"
 										required={true}
-										placeholder="Harvesting Date"
+										placeholder="Receiving Date"
 									/>
 								</div>
 								<div className="modal__cont__inputCont">
 									<input
 										type="text"
 										name="flush"
-											onChange={(e) => setFlush(e.target.value)}
+										onChange={(e) => setTemp(e.target.value)}
 										id="flush"
 										className="modal__cont__inputCont__input"
 										required={true}
-										placeholder="Flush Number"
+										placeholder="Storage Temperature"
 									/>
 								</div>
 								<input type="submit" value="Submit" className="modal__cont__submitBtn" />

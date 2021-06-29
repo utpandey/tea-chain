@@ -19,6 +19,10 @@ const Signin = () => {
 		isError: false,
 		errorMessage: ''
 	})
+	const [info, setInfo] = useState({
+		isInfo: false,
+		infoMessage: ''
+	})
 	const [ { email, password }, setCredentials ] = useState({
 		email: '',
 		password: ''
@@ -103,6 +107,13 @@ const Signin = () => {
 			})
 	}
 
+	const clearInfo =()=> {
+		setInfo({
+			isInfo: false,
+			infoMessage: '',
+		})
+	}
+
 	const clearError =()=> {
 		setError({
 			isError: false,
@@ -110,9 +121,33 @@ const Signin = () => {
 		})
 	}
 
+	const handleForgotPassword =()=> {
+		console.log(email);
+		if(email.length < 5) {
+			setError({
+				isError: true,
+				errorMessage: 'Enter a valid Email ID'
+			})
+		}
+		const postData = {
+			email,
+		}
+		axios.post('/authentication/forgotPassword', postData)
+			.then(res => {
+				console.log(res);
+				setInfo({
+					isInfo: true,
+					infoMessage: 'An email has been sent to your account with a reset link'
+				})
+			}).catch(err => {
+				console.log(err)
+			})
+	}
+
 	return (
 		<div className="signup__cont">
 			{error.isError && <Snackbar status="error" message={error.errorMessage} clearError={clearError} />}
+			{info.isInfo && <Snackbar status="info" message={info.infoMessage} clearError={clearInfo} />}
 			<div className="signup__cont__left">
 				<h1 className="signup__cont__left__title">Sign In</h1>
 				<div className="signup__cont__left__inputCont">
@@ -140,9 +175,9 @@ const Signin = () => {
 
 				<p className="signup__cont__left__msg">
 					Forgot Password?{' '}
-					<Link to="/" className="signup__cont__left__msg__link">
+					<div onClick={handleForgotPassword} className="signup__cont__left__msg__link">
 						Click here
-					</Link>
+					</div>
 				</p>
 
 				<button onClick={handleSignin} className="signup__cont__left__submitBtn">

@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from "react";
 import { ethers } from "ethers";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { AddBatch } from "src/store/batch";
 
 import Role from "../components/Role";
 import {
@@ -20,6 +21,9 @@ import document from "../assets/document.svg";
 import Batches from "src/components/Batches";
 import config from "../config";
 
+import code from "../assets/code.png";
+import download from "../assets/download.png";
+
 declare global {
   /* tslint:disable */
   interface Window {
@@ -35,7 +39,7 @@ const Admin: FC = () => {
   const batchState = useSelector(getBatchStateReducer);
   const userRole = useSelector(getUserTypeReducer);
   const [showModal, setModal] = useState<boolean>(false);
-  // console.log(batchState)
+  const dispatch = useDispatch();
   // console.log(userRole === 'Manufacturer')
   useEffect(() => {
     fetchTeachain();
@@ -55,7 +59,7 @@ const Admin: FC = () => {
       );
       try {
         const data = await contract.functions.getBatches(
-          "0x90F79bf6EB2c4f870365E785982E1f101E93b906"
+          "0xdF3e18d64BC6A983f673Ab319CCaE4f1a57C7097"
         );
         const response = await data[0];
         // console.log(response);
@@ -222,36 +226,116 @@ const Admin: FC = () => {
           )}
         </div>
         <hr />
-        <div
-          className="admin__cont__batchCont__content"
-          style={{ display: "flex", flexDirection: "column" }}
-        >
-          <div className="admin__cont__batchCont__content__header">
-            <h1 className="admin__cont__batchCont__content__header__text">
-              Batch ID
-            </h1>
-            <h1 className="admin__cont__batchCont__content__header__text">
-              Farm Inpsector
-            </h1>
-            <h1 className="admin__cont__batchCont__content__header__text">
-              Manufacturer
-            </h1>
-            <h1 className="admin__cont__batchCont__content__header__text">
-              Wholesaler
-            </h1>
-            <h1 className="admin__cont__batchCont__content__header__text">
-              Distributor
-            </h1>
-            <h1 className="admin__cont__batchCont__content__header__text">
-              Retailer
-            </h1>
-          </div>
-          <div className="admin__cont__batchCont__content__table">
-            <hr />
-            {teachain.length > 0 &&
-              teachain.map((data: any, key: any) => (
-                <Batches data={data} key={key} />
-              ))}
+        <div className="table__cont">
+          <div className="table">
+            <div className="table-header">
+              <div className="header__item">
+                <a id="id" className="filter__link " href="#">
+                  Batch ID
+                </a>
+              </div>
+              <div className="header__item">
+                <a id="name" className="filter__link " href="#">
+                  Farm Inpsector
+                </a>
+              </div>
+              <div className="header__item">
+                <a
+                  id="wins"
+                  className="filter__link filter__link--number"
+                  href="#"
+                >
+                  Manufacturer
+                </a>
+              </div>
+              <div className="header__item">
+                <a
+                  id="wins"
+                  className="filter__link filter__link--number"
+                  href="#"
+                >
+                  Wholesaler
+                </a>
+              </div>
+              <div className="header__item">
+                <a
+                  id="wins"
+                  className="filter__link filter__link--number"
+                  href="#"
+                >
+                  Distributor
+                </a>
+              </div>
+              <div className="header__item">
+                <a
+                  id="wins"
+                  className="filter__link filter__link--number"
+                  href="#"
+                >
+                  Retailer
+                </a>
+              </div>
+            </div>
+            <div className="table-content">
+              {teachain.length > 0
+                ? teachain.map((mainChainData: any, index: any) => {
+                    if (mainChainData.length > 2) {
+                      console.log(mainChainData);
+                      const batchId = parseInt(mainChainData[0]._hex, 16);
+                      const handleClick = () => {
+                        console.log(mainChainData);
+                        dispatch(AddBatch({ batchData: mainChainData }));
+                      };
+                      return (
+                        <div className="table-row" key={index}>
+                          <div className="table-data batch__cont">
+                            <h1 className="batch__cont--id" onClick={handleClick}>{batchId}</h1>
+                            <div className="batch__cont__img">
+                              <img
+                                src={code}
+                                alt="Qr Code"
+                                className="batch__cont__img--item"
+                              />
+                              <img
+                                src={download}
+                                alt="Download"
+                                className="batch__cont__img--item"
+                              />
+                            </div>
+                          </div>
+
+                          {mainChainData.map((secondData: any, index: any) => {
+                            const bool =
+                              mainChainData[
+                                mainChainData.indexOf(secondData) - 1
+                              ]?.isVerified;
+                            console.log(bool);
+                            return secondData.length > 2 ? (
+                              <>
+                                {secondData[secondData.length - 1] === false ? (
+                                  bool ? (
+                                    <button className=" box2__title3">
+                                      Processing
+                                    </button>
+                                  ) : (
+                                    <button className="  box2__title2">
+                                      Not Available
+                                    </button>
+                                  )
+                                ) : (
+                                  <button className=" box2__title1">
+                                    Completed
+                                  </button>
+                                )}
+                              </>
+                            ) : null;
+                          })}
+                        </div>
+                      );
+                    }
+                  })
+                : null}
+            </div>
           </div>
         </div>
       </div>
@@ -310,3 +394,39 @@ const Admin: FC = () => {
 export default Admin;
 
 // console.log(obj[i][obj[i].length-1]) to get isUpdate
+
+// return (
+//   <>
+//     <div className="table-row" key={index}>
+//       {/* <div className="table-data">{id++}</div> */}
+//       {/* <div className="table-data">{data.email}</div>
+//       <div className="table-data">{data.firstName}</div>
+//       <div className="table-data">{data.lastName}</div>
+//       <div className="table-data">{data.gender}</div>
+//       <div className="table-data">{data.phone}</div>
+//       <div className="table-data">{data.purpose}</div>
+//       <div className="table-data">{data.address}</div> */}
+//     </div>
+//   </>
+// );
+
+{
+  /* {visitors.map((data, index) => (
+                <div className="table-row" key={index}>
+                  <div className="table-data">{id++}</div>
+                  <div className="table-data">{data.email}</div>
+                  <div className="table-data">{data.firstName}</div>
+                  <div className="table-data">{data.lastName}</div>
+                  <div className="table-data">{data.gender}</div>
+                  <div className="table-data">{data.phone}</div>
+                  <div className="table-data">{data.purpose}</div>
+                  <div className="table-data">{data.address}</div>
+                  <div className="table-data">
+                    {data.vaccinated ? "Done" : "Not Yet"}
+                  </div>
+                  <div className="table-data">
+                    {data.inTime.hr}:{data.inTime.min}
+                  </div>
+                </div>
+              ))} */
+}

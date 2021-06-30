@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { Button, Card, FormControl, Table } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
 import { AddBatch } from "src/store/batch";
@@ -17,35 +18,155 @@ const Batches: FC<IBatchesProps> = ({ data }) => {
     console.log(data);
     dispatch(AddBatch({ batchData: data }));
   };
-  // console.log(data[1]);
   return (
-    <div className="box1">
-      <div className="box1__batchDetail">
-        <h1 className="box1__batchDetail__title" onClick={handleClick}>
-          {q}
-        </h1>
-        <img src={code} alt="Qr Code" className="box1__batchDetail__icon" />
-        <img src={download} alt="Qr Code" className="box1__batchDetail__icon" />
-      </div>
-      <div className="box1__item">
-        {/* {data.map((batchData: any, key: any) => (
-           <BatchComponent batchData={batchData} key={key} />
-        
-      ))} */}
-        {data.map((batchData: any, key: any) => {
-          if (batchData.length > 2) {
-            // if (batchData[batchData.length -1]) {
-            // console.log(data.indexOf(batchData));
-            // const isProcess =
-            //   data[data.indexOf(batchData) - 1][batchData.length - 1];
-            const bool = data[data.indexOf(batchData) - 1].isVerified;
-            // console.log(data[data.indexOf(batchData) - 1].isVerified);
-            // console.log(isProcess);
-            return (
-              <BatchComponent batchData={batchData} key={key} bool={bool} />
-            );
-          }
-        })}
+    // <div className="box1">
+    //   <div className="box1__batchDetail">
+    //     <h1 className="box1__batchDetail__title" onClick={handleClick}>
+    //       {q}
+    //     </h1>
+    //     <img src={code} alt="Qr Code" className="box1__batchDetail__icon" />
+    //     <img src={download} alt="Qr Code" className="box1__batchDetail__icon" />
+    //   </div>
+    //   <div className="box1__item">
+    //     {data.map((batchData: any, key: any) => {
+    //       if (batchData.length > 2) {
+    //         const bool = data[data.indexOf(batchData) - 1].isVerified;
+    //         return (
+    //           <BatchComponent batchData={batchData} key={key} bool={bool} />
+    //         );
+    //       }
+    //     })}
+    //   </div>
+    // </div>
+    <div className="table__cont">
+      <div className="table">
+        <div className="table-header">
+          <div className="header__item">
+            <a id="id" className="filter__link " href="#">
+              ID
+            </a>
+          </div>
+          <div className="header__item">
+            <a id="name" className="filter__link " href="#">
+              Email
+            </a>
+          </div>
+          <div className="header__item">
+            <a id="wins" className="filter__link filter__link--number" href="#">
+              First Name
+            </a>
+          </div>
+          <div className="header__item">
+            <a id="wins" className="filter__link filter__link--number" href="#">
+              Last Name
+            </a>
+          </div>
+          <div className="header__item">
+            <a id="wins" className="filter__link filter__link--number" href="#">
+              Gender
+            </a>
+          </div>
+          <div className="header__item">
+            <a id="wins" className="filter__link filter__link--number" href="#">
+              Phone
+            </a>
+          </div>
+          <div className="header__item">
+            <a id="wins" className="filter__link filter__link--number" href="#">
+              Purpose
+            </a>
+          </div>
+          <div className="header__item">
+            <a
+              id="draws"
+              className="filter__link filter__link--number"
+              href="#"
+            >
+              Address
+            </a>
+          </div>
+          <div className="header__item">
+            <a
+              id="losses"
+              className="filter__link filter__link--number"
+              href="#"
+            >
+              Vaccinated
+            </a>
+          </div>
+          <div className="header__item">
+            <a
+              id="total"
+              className="filter__link filter__link--number"
+              href="#"
+            >
+              Visiting Time
+            </a>
+          </div>
+        </div>
+        <div className="table-content">
+          {data.map((batchData: any, key: any) => {
+            if (batchData.length > 2) {
+              const bool = data[data.indexOf(batchData) - 1].isVerified;
+              return (
+                <>
+                  <div className="table-row" key={key}>
+                    <div className="table-data" onClick={handleClick}>
+                      {q}
+                    </div>
+                    <img src={code} alt="Qr Code" className="table-data" />
+                    <img src={download} alt="Qr Code" className="table-data" />
+                    {batchData[batchData.length - 1] === false ? (
+                      bool ? (
+                        <button className="table-data box2__title3">
+                          Processing
+                        </button>
+                      ) : (
+                        <button className="table-data box2__title2">
+                          Not Available
+                        </button>
+                      )
+                    ) : (
+                      <button className="box2__title1">Completed</button>
+                    )}
+                    {/* <div className="table-data">{data.email}</div>
+                  <div className="table-data">{data.firstName}</div>
+                  <div className="table-data">{data.lastName}</div>
+                  <div className="table-data">{data.gender}</div>
+                  <div className="table-data">{data.phone}</div>
+                  <div className="table-data">{data.purpose}</div>
+                  <div className="table-data">{data.address}</div>
+                  <div className="table-data">
+                    {data.vaccinated ? "Done" : "Not Yet"}
+                  </div>
+                  <div className="table-data">
+                    {data.inTime.hr}:{data.inTime.min}
+                  </div> */}
+                  </div>
+                  {/* <BatchComponent batchData={batchData} key={key} bool={bool} /> */}
+                </>
+              );
+            }
+          })}
+          {/* {visitors.map((data, index) => (
+            <div className="table-row" key={index}>
+              <div className="table-data">{id++}</div>
+              <div className="table-data">{data.email}</div>
+              <div className="table-data">{data.firstName}</div>
+              <div className="table-data">{data.lastName}</div>
+              <div className="table-data">{data.gender}</div>
+              <div className="table-data">{data.phone}</div>
+              <div className="table-data">{data.purpose}</div>
+              <div className="table-data">{data.address}</div>
+              <div className="table-data">
+                {data.vaccinated ? "Done" : "Not Yet"}
+              </div>
+              <div className="table-data">
+                {data.inTime.hr}:{data.inTime.min}
+              </div>
+            </div>
+          ))} */}
+        </div>
       </div>
     </div>
   );
@@ -59,24 +180,6 @@ interface IBatchComponentProps {
 }
 
 const BatchComponent: FC<IBatchComponentProps> = ({ batchData, bool }) => {
-  // console.log("BatchComponent");
-  // console.log(batchData);
-  // console.log(batchData[batchData.length-1])
-  // console.log(id)
-  // for (let i = 0; i < id.length; i++) {
-  //   if (index) {
-  //     console.log(index)
-  //   }
-  // }
-  // console.log(id[0]);
-  console.log(bool);
-  const [isProcessed, setProcess] = React.useState(false);
-  React.useEffect(() => {
-    if (batchData[batchData.length - 1]) {
-      setProcess(true);
-    }
-  }, []);
-  // console.log(batchData[batchData.length - 1]);
   return (
     <div className="box2">
       {batchData[batchData.length - 1] === false ? (
@@ -88,11 +191,6 @@ const BatchComponent: FC<IBatchComponentProps> = ({ batchData, bool }) => {
       ) : (
         <button className="box2__title1">Completed</button>
       )}
-      {/* <div className="box2__item">{batchData[0]}</div>
-      <div className="box2__item">{batchData[1]}</div>
-      <div className="box2__item">{batchData[2]}</div> */}
-      {/* <div className="admin__cont__batchCont__content__row__role">{batchData[3]}</div> */}
-      {/* <div className="admin__cont__batchCont__content__row__role">{batchData[4]}</div> */}
     </div>
   );
 };

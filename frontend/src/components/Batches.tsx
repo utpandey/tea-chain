@@ -2,7 +2,9 @@ import React, { FC } from "react";
 import { useDispatch } from "react-redux";
 
 import { AddBatch } from "src/store/batch";
-import { getBatchStateReducer } from "../store/batch";
+
+import code from "../assets/code.png";
+import download from "../assets/download.png";
 
 interface IBatchesProps {
   data: any;
@@ -18,9 +20,13 @@ const Batches: FC<IBatchesProps> = ({ data }) => {
   // console.log(data[1]);
   return (
     <div className="box1">
-      <h1 className="box1__title" onClick={handleClick}>
-        {q}
-      </h1>
+      <div className="box1__batchDetail">
+        <h1 className="box1__batchDetail__title" onClick={handleClick}>
+          {q}
+        </h1>
+        <img src={code} alt="Qr Code" className="box1__batchDetail__icon" />
+        <img src={download} alt="Qr Code" className="box1__batchDetail__icon" />
+      </div>
       <div className="box1__item">
         {/* {data.map((batchData: any, key: any) => (
            <BatchComponent batchData={batchData} key={key} />

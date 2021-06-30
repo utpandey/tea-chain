@@ -1,6 +1,7 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, MouseEvent, useRef } from "react";
 import { ethers } from "ethers";
 import { useSelector, useDispatch } from "react-redux";
+import QRcode from "qrcode.react"
 import { AddBatch } from "src/store/batch";
 
 import Role from "../components/Role";
@@ -17,7 +18,7 @@ import { getUserTypeReducer } from "../store/auth";
 
 
 import user from "../assets/user.svg";
-import document from "../assets/document.svg";
+import documentImg from "../assets/document.svg";
 import Batches from "src/components/Batches";
 import config from "../config";
 
@@ -39,11 +40,28 @@ const Admin: FC = () => {
   const batchState = useSelector(getBatchStateReducer);
   const userRole = useSelector(getUserTypeReducer);
   const [showModal, setModal] = useState<boolean>(false);
+  const elementsRef = useRef([]);
   const dispatch = useDispatch();
   // console.log(userRole === 'Manufacturer')
   useEffect(() => {
     fetchTeachain();
   }, []);
+
+  const downloadQrCode =(e: MouseEvent<HTMLImageElement, any>, batchId: number)=> {
+    const elementId = 'ref_qr_' + batchId;
+    const canvas = document.getElementById(elementId) as HTMLCanvasElement;
+    const pngUrl = canvas?.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    let downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = elementId;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  const qrCodeStyle = {
+    display: "none"
+  }
 
   async function requestAccount() {
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -58,12 +76,15 @@ const Admin: FC = () => {
         provider
       );
       try {
-        const data = await contract.functions.getBatches(
-          "0xdF3e18d64BC6A983f673Ab319CCaE4f1a57C7097"
-        );
+        await requestAccount();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const ownerAddress = await signer.getAddress()
+        const data = await contract.functions.getBatches(ownerAddress);
         const response = await data[0];
         // console.log(response);
         setTeachainValue(response);
+        console.log(response)
 
         setBatchNo(data[0].length);
 
@@ -193,7 +214,7 @@ const Admin: FC = () => {
           </h1>
           <div className="admin__cont__infoCont__rolesCont__content">
             <img
-              src={document}
+              src={documentImg}
               alt=""
               className="admin__cont__infoCont__rolesCont__content__img"
             />
@@ -291,9 +312,15 @@ const Admin: FC = () => {
                           <div className="table-data batch__cont">
                             <h1 className="batch__cont--id" onClick={handleClick}>{batchId}</h1>
                             <div className="batch__cont__img">
+                              <QRcode 
+                                id={`ref_qr_${batchId}`}
+                                value={"http://localhost:3000/status/" + batchId}
+                                style={qrCodeStyle}
+                              />
                               <img
                                 src={code}
                                 alt="Qr Code"
+                                onClick={(e) => downloadQrCode(e, batchId)}
                                 className="batch__cont__img--item"
                               />
                               <img

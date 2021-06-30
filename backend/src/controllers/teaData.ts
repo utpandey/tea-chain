@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
 import TeaChainServices from '../services/TeaChainServices';
 
-const retrieve = (req: Request, res: Response) => {
+const retrieve = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const result = TeaChainServices.retrieveData(id);
+  const result = await TeaChainServices.retrieveData(id);
 
   if (result) {
     res.status(200).json({
       result: true,
-      message: id,
+      message: result,
     });
   } else {
     res.status(404).json({

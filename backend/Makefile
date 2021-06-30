@@ -7,5 +7,8 @@ up-prod:
 down:
 	docker-compose down
 
+update:
+	docker-compose build
+
 logs:
 	docker-compose logs -f --no-log-prefix

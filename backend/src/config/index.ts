@@ -16,4 +16,6 @@ export default {
   clientSecret: process.env.CLIENT_SECRET,
   redirectURL: process.env.REDIRECT_URI,
   refreshToken: process.env.REFRESH_TOKEN,
+  contractAddress: process.env.CONTRACT_ADDRESS,
+  providerAddress: process.env.PROVIDER_ADDRESS,
 };

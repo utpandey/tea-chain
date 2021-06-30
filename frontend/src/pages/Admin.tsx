@@ -14,9 +14,11 @@ import Teachain from "../artifacts/contracts/Teachain.sol/Teachain.json";
 import { getBatchStateReducer } from "../store/batch";
 import { getUserTypeReducer } from "../store/auth";
 
+
 import user from "../assets/user.svg";
 import document from "../assets/document.svg";
 import Batches from "src/components/Batches";
+import config from "../config";
 
 declare global {
   /* tslint:disable */
@@ -25,7 +27,7 @@ declare global {
   }
 }
 
-const teachainAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const teachainAddress = config.contractAddress || '';
 
 const Admin: FC = () => {
   const [teachain, setTeachainValue] = useState<any>([]);

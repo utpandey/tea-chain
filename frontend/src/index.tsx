@@ -83,7 +83,7 @@ const Routing = () => {
         </AnimatePresence>
         <Footer />
       </motion.div>
-      <Route exact={true} path="/status">
+      <Route exact={true} path="/status/:id">
         <Status />
       </Route>
     </Router>

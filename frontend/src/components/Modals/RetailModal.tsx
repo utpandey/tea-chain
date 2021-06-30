@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import Teachain from '../../artifacts/contracts/Teachain.sol/Teachain.json';
 import { eventNames } from 'node:process';
+import config from 'src/config';
 
 interface IModalProps {
 	showModal: any;
@@ -11,7 +12,7 @@ interface IModalProps {
 	fetchTeachain: any;
 }
 
-const teachainAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+const teachainAddress = config.contractAddress || '';
 
 export const RetailModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) => {
 	const [ batchId, setBatchId ] = useState('');

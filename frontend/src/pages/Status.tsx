@@ -1,6 +1,8 @@
 import React, { FC, useState, useEffect } from "react";
 import { ethers } from "ethers";
 import StatusCard from "src/components/StatusCard";
+import axios from "../utils/axios";
+import { useParams } from "react-router";
 
 declare global {
   /* tslint:disable */
@@ -158,18 +160,28 @@ const dataArray = [
   ],
 ];
 
+interface paramType {
+  id: string,
+}
+
 const Status: FC = () => {
   const [teachain, setTeachainValue] = useState<any>([]);
+  const { id } = useParams<paramType>();
+
+  useEffect(() => {
+    console.log(id)
+    axios.get(`/teaData/${id}`).then((res) => {
+      setTeachainValue(res.data.message)
+    })
+  }, [id])
 
   return (
     <React.Fragment>
       <div className="status">
         <div className="status__cont">
-          {dataArray.map((data: any, key: any) => {
-            console.log(key);
+          {teachain.map((data: any, key: any) => {
             if (data.length > 2 && key < 7) {
-              console.log(key);
-              return <StatusCard data={data} />;
+              return <StatusCard key={key} data={data} />;
             }
           })}
         </div>

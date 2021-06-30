@@ -26,6 +26,7 @@
         "hardhat": "^2.2.1",
         "md5": "^2.3.0",
         "react": "^17.0.2",
+        "react-bootstrap": "^1.6.1",
         "react-dom": "^17.0.2",
         "react-gsap": "^3.2.1",
         "react-icons": "^4.2.0",

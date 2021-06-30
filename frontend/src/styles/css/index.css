@@ -806,26 +806,97 @@ blockquote {
 .box2__title1 {
   color: white;
   border-radius: 10rem;
-  padding: 1rem 3rem 1rem 3rem;
+  margin: 0.5rem 0rem 0.5rem 2rem;
   border: none;
   pointer-events: none;
-  background-color: green; }
+  background-color: green;
+  width: 10%;
+  flex: 1;
+  font-size: 1.5rem; }
 
 .box2__title2 {
   color: white;
   border-radius: 10rem;
-  padding: 1rem 3rem 1rem 3rem;
+  margin: 0.5rem 0rem 0.5rem 2rem;
   border: none;
   pointer-events: none;
-  background-color: red; }
+  background-color: red;
+  font-size: 1.5rem;
+  width: 10%;
+  flex: 1; }
 
 .box2__title3 {
   color: white;
   border-radius: 10rem;
-  padding: 1rem 3rem 1rem 3rem;
+  margin: 0.5rem 0rem 0.5rem 2rem;
   border: none;
   pointer-events: none;
-  background-color: orange; }
+  background-color: orange;
+  width: 10%;
+  flex: 1;
+  font-size: 1.5rem; }
+
+.batch__cont {
+  display: flex;
+  justify-content: space-evenly; }
+
+.batch__cont--id {
+  font-size: 2.5rem; }
+
+.batch__cont__img {
+  align-self: center; }
+
+.batch__cont__img--item {
+  padding: 0 1rem 0 0; }
+
+.table__cont {
+  border: 1px solid #EEEEEE;
+  border-radius: 1rem; }
+
+.table__cont .table {
+  width: 100%; }
+
+.table__cont .table-header {
+  border-radius: 1rem 1rem 0 0;
+  display: flex;
+  width: 100%;
+  background: #aca0a0;
+  padding: 18px 0; }
+
+.table__cont .table-row {
+  display: flex;
+  width: 100%;
+  padding: 18px 1rem; }
+
+.table__cont .table-row:nth-of-type(odd) {
+  background: #EEEEEE; }
+
+.table__cont .table-data,
+.table__cont .header__item {
+  width: 10%;
+  flex: 1;
+  text-align: center; }
+
+.table__cont .header__item {
+  width: 10%;
+  text-transform: uppercase; }
+
+.table__cont .filter__link {
+  color: white;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-left: 24px;
+  padding-right: 24px; }
+
+.table__cont .filter__link::after {
+  content: '';
+  position: absolute;
+  right: -18px;
+  color: white;
+  font-size: 12px;
+  top: 50%;
+  transform: translateY(-50%); }
 
 .footer__cont {
   background-color: var(--color-primary-4);

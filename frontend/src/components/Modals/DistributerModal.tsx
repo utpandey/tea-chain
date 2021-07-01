@@ -180,9 +180,9 @@ export const DistributerModal: FC<IModalProps> = ({
                 <div className="modal__cont__inputCont">
                   <input
                     type="text"
-                    name="flush"
+                    name="temp"
                     onChange={(e) => setTemp(e.target.value)}
-                    id="flush"
+                    id="temp"
                     className="modal__cont__inputCont__input"
                     required={true}
                     placeholder="Storage Temperature"

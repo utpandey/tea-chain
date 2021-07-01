@@ -23,7 +23,6 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 	const [ location, setLocation ] = useState('');
 	const [ date, setDate ] = useState('');
 	const [ flush, setFlush ] = useState('');
-	console.log(loading);
 
 	async function requestAccount() {
 		await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -168,9 +167,9 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 								<div className="modal__cont__inputCont">
 									<input
 										type="text"
-										name="species"
-											onChange={(e) => setTeaSpecies(e.target.value)}
-										id="species"
+										name="teaSpecies"
+										onChange={(e) => setTeaSpecies(e.target.value)}
+										id="teaSpecies"
 										className="modal__cont__inputCont__input"
 										required={true}
 										placeholder="Tea Species"

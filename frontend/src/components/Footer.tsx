@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 const Footer = (props: any) => {
   const history = useHistory();
-  if (history.location.pathname === "/status") {
+  if (history.location.pathname.includes("/status")) {
     return null;
   }
   return (

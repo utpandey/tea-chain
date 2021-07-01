@@ -1,0 +1,39 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "/home/utsavpandey8/EMOH/FinalYearProject/TeaChainIII/TeaChain/backend/contracts/Teachain.sol": {
+      "lastModificationDate": 1625047583902,
+      "contentHash": "1e6ab672ea10982117089b4b626d87eb",
+      "sourceName": "contracts/Teachain.sol",
+      "solcConfig": {
+        "version": "0.8.3",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.3"
+      ],
+      "artifacts": [
+        "Teachain"
+      ]
+    }
+  }
+}

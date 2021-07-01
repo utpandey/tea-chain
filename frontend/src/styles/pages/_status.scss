@@ -6,7 +6,7 @@ $primary-text: #212121;
 $secondary-text: #757575;
 $accent: #FF4081;
 .status {
-    max-width: 150rem;
+    max-width: 125rem;
     margin: 15rem auto;
     // @media screen and (max-width: 1440px) {
     //     max-width: 120rem;
@@ -16,14 +16,14 @@ $accent: #FF4081;
     //     max-width: 100rem;
     //     margin: 8rem auto;
     // }
-    // @include respond(tab-port) {
-    //     max-width: 80rem;
-    //     margin: 8rem auto;
-    // }
-    // @include respond(phone) {
-    //     max-width: 70rem;
-    //     margin: 8rem auto;
-    // }
+    @include respond(tab-port) {
+        max-width: 60rem;
+        margin: 8rem auto;
+    }
+    @include respond(phone) {
+        max-width: 70rem;
+        margin: 8rem auto;
+    }
 }
 
 .status__cont {
@@ -32,7 +32,7 @@ $accent: #FF4081;
         content: '';
         background: $light-primary;
         width: 5px;
-        height: 98%;
+        height: 100%;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -45,7 +45,8 @@ $accent: #FF4081;
     &:nth-child(even) {
         .status__cont__card__content {
             float: right;
-            padding: 40px 30px 10px 30px;
+            padding: 3rem;
+            align-items: flex-end;
             .status__cont__card__content--role {
                 right: auto;
                 left: 0;
@@ -61,6 +62,12 @@ $accent: #FF4081;
                 border-width: 10px 15px 10px 0;
                 border-color: transparent #f5f5f5 transparent transparent;
             }
+            .status__cont__card__content--body {
+                // background-color: black;
+                position: relative;
+                right: 0;
+                // left: auto;
+            }
         }
     }
     &::after {
@@ -73,7 +80,9 @@ $accent: #FF4081;
 .status__cont__card__content {
     position: relative;
     width: 45%;
-    padding: 10px 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem;
     border-radius: 4px;
     background: #f5f5f5;
     box-shadow: 0 20px 25px -15px rgba(0, 0, 0, .3);
@@ -121,42 +130,6 @@ $accent: #FF4081;
 //         text-decoration: none;
 //     }
 // }
-.status__cont-card {
-    padding: 0!important;
-    p {
-        padding: 0 20px;
-    }
-    a {
-        margin-left: 20px;
-    }
-}
-
-.status__cont-item {
-    .status__cont-img-header {
-        background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, .4)), url('https://picsum.photos/1000/800/?random') center center no-repeat;
-        background-size: cover;
-    }
-}
-
-.status__cont-img-header {
-    height: 200px;
-    position: relative;
-    margin-bottom: 20px;
-    h2 {
-        color: $text;
-        position: absolute;
-        bottom: 5px;
-        left: 20px;
-    }
-}
-
-blockquote {
-    margin-top: 30px;
-    color: $secondary-text;
-    border-left-color: $primary;
-    padding: 0 20px;
-}
-
 .status__cont__card__content--role {
     background: $accent;
     display: inline-block;
@@ -165,6 +138,14 @@ blockquote {
     position: absolute;
     top: 0;
     right: 0;
+    font-size: 2rem;
+}
+
+.status__cont__card__content--body {
+    font-size: 2rem;
+    span {
+        color: black;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -180,11 +161,26 @@ blockquote {
             max-width: 100%;
             width: auto;
             margin-left: 70px;
+            .status__cont__card__content--role {
+                font-size: 1.5rem;
+            }
+            .status__cont__card__content--body {
+                width: 50%;
+                font-size: 2rem;
+                span {
+                    color: black;
+                }
+            }
         }
         .status__cont__card {
             &:nth-child(even) {
                 .status__cont__card__content {
                     float: none;
+                    align-items: flex-start;
+                    .status__cont__card__content--role {
+                        right: 0;
+                        left: auto;
+                    }
                 }
             }
             &:nth-child(odd) {

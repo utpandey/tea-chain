@@ -16,7 +16,6 @@ import Teachain from "../artifacts/contracts/Teachain.sol/Teachain.json";
 import { getBatchStateReducer } from "../store/batch";
 import { getUserTypeReducer } from "../store/auth";
 
-
 import user from "../assets/user.svg";
 import documentImg from "../assets/document.svg";
 import Batches from "src/components/Batches";

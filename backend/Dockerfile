@@ -10,8 +10,8 @@ COPY contracts ./contracts
 
 COPY scripts ./scripts
 
-COPY hardhat.config.js ./hardhat.config.js
+# COPY hardhat.config.js ./hardhat.config.js
 
-RUN npm run deploy:contract
+# RUN npm run deploy:contract
 
 COPY . .

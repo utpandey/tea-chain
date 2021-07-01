@@ -29,7 +29,7 @@ import { getUserStateReducer, LOGOUT } from "src/store/auth";
 
 const Header = () => {
   const history = useHistory();
-  if (history.location.pathname === "/status") {
+  if (history.location.pathname.includes("/status")) {
     return null;
   }
   const isAuthenticated = useSelector(getUserStateReducer);
@@ -44,7 +44,7 @@ const Header = () => {
       {/* initial={{y:-250}}
 		animate={{ y: -10, }}
 		transition={{ delay: 0.5,type:'spring',stiffness: 120}} */}
-      <Link to="/">
+         <Link to="/">
         <motion.div
           drag={true}
           dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}

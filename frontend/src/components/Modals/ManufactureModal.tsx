@@ -49,7 +49,7 @@ export const ManufactureModal: FC<IModalProps> = ({ showModal, setModal, fetchTe
 					name,
 					teaType,
 					newDate.getTime(),
-					duration
+					parseInt(duration,10)
 				);
 				await transactionTwo.wait();
 				fetchTeachain()
@@ -173,7 +173,7 @@ export const ManufactureModal: FC<IModalProps> = ({ showModal, setModal, fetchTe
 								</div>
 								<div className="modal__cont__inputCont">
 									<input
-										type="text"
+										type="date"
 										name="date"
 											onChange={(e) => setDate(e.target.value)}
 										id="date"

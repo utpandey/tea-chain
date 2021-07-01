@@ -158,7 +158,7 @@ export const WholesaleModal: FC<IModalProps> = ({ showModal, setModal, fetchTeac
 								</div>
 								<div className="modal__cont__inputCont">
 									<input
-										type="text"
+										type="date"
 										name="date"
 											onChange={(e) => setDate(e.target.value)}
 										id="date"

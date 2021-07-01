@@ -10,19 +10,20 @@ interface IModalProps {
 	showModal: any;
 	setModal: any;
 	fetchTeachain: any;
+	loading: boolean;
+	setLoading: any;
 }
 
 const teachainAddress = config.contractAddress || '';
 
-export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) => {
-	const [ batchId, setBatchId ] = useState('');
+export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain, loading, setLoading }) => {
 	const [ address, setAddress ] = useState('');
 	const [ name, setName ] = useState('');
 	const [ teaSpecies, setTeaSpecies ] = useState('');
 	const [ location, setLocation ] = useState('');
 	const [ date, setDate ] = useState('');
 	const [ flush, setFlush ] = useState('');
-	// console.log('modalopens');
+	console.log(loading);
 
 	async function requestAccount() {
 		await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -30,7 +31,10 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 
 	async function setTeachain(event:React.FormEvent) {
 		// if (!teachain) return
-    event.preventDefault();
+		event.preventDefault();
+		const newDate = new Date(date);
+		console.log(newDate.getTime())
+		setLoading(true);
 		if (typeof window.ethereum !== 'undefined') {
 			await requestAccount();
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -47,13 +51,16 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 					name,
 					teaSpecies,
 					location,
-					Math.round(new Date().getTime() / 10000),
+					newDate.getTime(),
+					// Math.round(new Date().getTime() / 10000),
 					flush
 				);
 				await transactionTwo.wait();
 				fetchTeachain()
+				setLoading(false);
 				setModal(false)
 			});
+			console.log('before transaction // MoDal')
 			console.log(transaction);
 		}
 	}
@@ -182,7 +189,7 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 								</div>
 								<div className="modal__cont__inputCont">
 									<input
-										type="text"
+										type="date"
 										name="date"
 											onChange={(e) => setDate(e.target.value)}
 										id="date"

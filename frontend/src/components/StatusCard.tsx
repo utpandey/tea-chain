@@ -34,7 +34,7 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                     Tea Location: <span>{data[4]}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
-                    Harvesting Date: <span>{parseInt(data[5].hex, 16)}</span>
+                    Harvesting Date: <span>{(new Date(parseInt(data[5].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
                     Flush Number: <span>{data[6]}</span>
@@ -72,11 +72,11 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                     Tea Type: <span>{data[3]}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
-                    Receiving Date: <span>{parseInt(data[4].hex, 16)}</span>
+                    Receiving Date: <span>{(new Date(parseInt(data[4].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
                     Withering Duration :{" "}
-                    <span>{parseInt(data[5].hex, 16)}</span>
+                    <span>{(new Date(parseInt(data[5].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <div className="status__cont__card__content--role">
                     Manufacturer
@@ -108,7 +108,7 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                     Wholesaler name: <span>{data[2]}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
-                    Receiving Date: <span>{parseInt(data[3].hex, 16)}</span>
+                    Receiving Date: <span>{(new Date(parseInt(data[3].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <div className="status__cont__card__content--role">
                     Wholesaler
@@ -143,7 +143,7 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                     Distributor name: <span>{data[2]}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
-                    Receiving Date: <span>{parseInt(data[3].hex, 16)}</span>
+                    Receiving Date: <span>{(new Date(parseInt(data[4].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
                     Storage Temp: <span>{data[4]}</span>
@@ -178,7 +178,7 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                     Retailer name: <span>{data[2]}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
-                    Receiving date: <span>{parseInt(data[3].hex, 16)}</span>
+                    Receiving date: <span>{(new Date(parseInt(data[3].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <div className="status__cont__card__content--role">
                     Retailer

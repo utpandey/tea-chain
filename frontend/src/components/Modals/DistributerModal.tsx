@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import Teachain from "../../artifacts/contracts/Teachain.sol/Teachain.json";
 import config from "src/config";
-
 interface IModalProps {
   showModal: any;
   setModal: any;
   fetchTeachain: any;
+  loading: boolean;
+	setLoading: any;
 }
 
 const teachainAddress = config.contractAddress || '';
@@ -17,6 +18,8 @@ export const DistributerModal: FC<IModalProps> = ({
   showModal,
   setModal,
   fetchTeachain,
+  loading,
+  setLoading
 }) => {
   const [batchId, setBatchId] = useState("");
   const [address, setAddress] = useState("");
@@ -32,6 +35,9 @@ export const DistributerModal: FC<IModalProps> = ({
   async function setTeachain(event: React.FormEvent) {
     // if (!teachain) return
     event.preventDefault();
+    const newDate = new Date(date);
+		console.log(newDate.getTime())
+		setLoading(true);
     if (typeof window.ethereum !== "undefined") {
       await requestAccount();
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -48,11 +54,12 @@ export const DistributerModal: FC<IModalProps> = ({
           batchId,
           address,
           name,
-          Math.round(new Date().getTime() / 10000),
+          newDate.getTime(),
           temp
         );
         await transactionTwo.wait();
         fetchTeachain();
+        setLoading(false);
         setModal(false);
       });
       console.log(transaction);

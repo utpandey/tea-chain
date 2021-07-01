@@ -10,11 +10,13 @@ interface IModalProps {
 	showModal: any;
 	setModal: any;
 	fetchTeachain: any;
+	loading: boolean;
+	setLoading: any;
 }
 
 const teachainAddress = config.contractAddress || '';
 
-export const WholesaleModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain }) => {
+export const WholesaleModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain, setLoading }) => {
 	const [ batchId, setBatchId ] = useState('');
 	const [ address, setAddress ] = useState('');
 	const [ name, setName ] = useState('');
@@ -27,6 +29,9 @@ export const WholesaleModal: FC<IModalProps> = ({ showModal, setModal, fetchTeac
 	async function setTeachain(event:React.FormEvent) {
 		// if (!teachain) return
     event.preventDefault();
+		const newDate = new Date(date);
+		console.log(newDate.getTime())
+		setLoading(true);
 		if (typeof window.ethereum !== 'undefined') {
 			await requestAccount();
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -40,10 +45,11 @@ export const WholesaleModal: FC<IModalProps> = ({ showModal, setModal, fetchTeac
 					batchId,
 					address,
 					name,
-					Math.round(new Date().getTime() / 10000),
+					newDate.getTime(),
 				);
 				await transactionTwo.wait();
 				fetchTeachain()
+				setLoading(false);
 				setModal(false)
 			});
 			console.log(transaction);

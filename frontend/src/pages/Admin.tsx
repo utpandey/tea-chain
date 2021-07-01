@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, MouseEvent, useRef } from "react";
 import { ethers } from "ethers";
 import { useSelector, useDispatch } from "react-redux";
-import QRcode from "qrcode.react"
+import QRcode from "qrcode.react";
 import { AddBatch } from "src/store/batch";
 
 import Role from "../components/Role";
@@ -11,6 +11,7 @@ import {
   DistributerModal,
   RetailModal,
   WholesaleModal,
+  LoaderModal,
 } from "../components/Modals";
 import Teachain from "../artifacts/contracts/Teachain.sol/Teachain.json";
 import { getBatchStateReducer } from "../store/batch";
@@ -31,7 +32,7 @@ declare global {
   }
 }
 
-const teachainAddress = config.contractAddress || '';
+const teachainAddress = config.contractAddress || "";
 
 const Admin: FC = () => {
   const [teachain, setTeachainValue] = useState<any>([]);
@@ -39,6 +40,7 @@ const Admin: FC = () => {
   const batchState = useSelector(getBatchStateReducer);
   const userRole = useSelector(getUserTypeReducer);
   const [showModal, setModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
   const elementsRef = useRef([]);
   const dispatch = useDispatch();
   // console.log(userRole === 'Manufacturer')
@@ -46,10 +48,15 @@ const Admin: FC = () => {
     fetchTeachain();
   }, []);
 
-  const downloadQrCode =(e: MouseEvent<HTMLImageElement, any>, batchId: number)=> {
-    const elementId = 'ref_qr_' + batchId;
+  const downloadQrCode = (
+    e: MouseEvent<HTMLImageElement, any>,
+    batchId: number
+  ) => {
+    const elementId = "ref_qr_" + batchId;
     const canvas = document.getElementById(elementId) as HTMLCanvasElement;
-    const pngUrl = canvas?.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    const pngUrl = canvas
+      ?.toDataURL("image/png")
+      .replace("image/png", "image/octet-stream");
     let downloadLink = document.createElement("a");
     downloadLink.href = pngUrl;
     downloadLink.download = elementId;
@@ -59,8 +66,8 @@ const Admin: FC = () => {
   };
 
   const qrCodeStyle = {
-    display: "none"
-  }
+    display: "none",
+  };
 
   async function requestAccount() {
     await window.ethereum.request({ method: "eth_requestAccounts" });
@@ -78,12 +85,12 @@ const Admin: FC = () => {
         await requestAccount();
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
-        const ownerAddress = await signer.getAddress()
+        const ownerAddress = await signer.getAddress();
         const data = await contract.functions.getBatches(ownerAddress);
         const response = await data[0];
         // console.log(response);
         setTeachainValue(response);
-        console.log(response)
+        console.log(response);
 
         setBatchNo(data[0].length);
 
@@ -309,11 +316,18 @@ const Admin: FC = () => {
                       return (
                         <div className="table-row" key={index}>
                           <div className="table-data batch__cont">
-                            <h1 className="batch__cont--id" onClick={handleClick}>{batchId}</h1>
+                            <h1
+                              className="batch__cont--id"
+                              onClick={handleClick}
+                            >
+                              {batchId}
+                            </h1>
                             <div className="batch__cont__img">
-                              <QRcode 
+                              <QRcode
                                 id={`ref_qr_${batchId}`}
-                                value={"http://localhost:3000/status/" + batchId}
+                                value={
+                                  "http://localhost:3000/status/" + batchId
+                                }
                                 style={qrCodeStyle}
                               />
                               <img
@@ -322,11 +336,11 @@ const Admin: FC = () => {
                                 onClick={(e) => downloadQrCode(e, batchId)}
                                 className="batch__cont__img--item"
                               />
-                              <img
+                              {/* <img
                                 src={download}
                                 alt="Download"
                                 className="batch__cont__img--item"
-                              />
+                              /> */}
                             </div>
                           </div>
 
@@ -379,6 +393,8 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
+          loading={loading}
+          setLoading={setLoading}
         />
       )}
       {userRole === "Manufacturer" && (
@@ -386,6 +402,8 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
+           loading={loading}
+          setLoading={setLoading}
         />
       )}
       {userRole === "Wholesaler" && (
@@ -393,6 +411,8 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
+           loading={loading}
+          setLoading={setLoading}
         />
       )}
       {userRole === "Distributer" && (
@@ -400,6 +420,8 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
+           loading={loading}
+          setLoading={setLoading}
         />
       )}
       {userRole === "Retailer" && (
@@ -407,9 +429,11 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
+           loading={loading}
+          setLoading={setLoading}
         />
       )}
-
+      {loading ? <LoaderModal /> : null}
       {/* <button onClick={fetchTeachain}>Click</button>
 			<button onClick={updateManufcturerEntry}>Click</button>
 			<button onClick={updateWholesalerEntry}>Click</button> */}

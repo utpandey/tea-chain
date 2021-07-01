@@ -973,6 +973,15 @@ html {
   padding: 5rem;
   border-radius: 1rem; }
 
+.modal-content-wrapper-loader {
+  position: fixed;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-radius: 1rem; }
+
 .modal__cont {
   display: flex;
   flex-direction: column;

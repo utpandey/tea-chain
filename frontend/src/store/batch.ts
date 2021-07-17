@@ -29,11 +29,16 @@ const batchSlice = createSlice({
 			//     userProfile: {},
 			//   };
 			// },
-		}
+		},
+			EmptyBatch: () => {
+				return {
+					batchData: null
+				};
+			},
 	}
 });
 
 export const getBatchStateReducer = (state: { batch: IBatchState }) => state.batch.batchData;
 
-export const { AddBatch } = batchSlice.actions;
+export const { AddBatch, EmptyBatch } = batchSlice.actions;
 export default batchSlice.reducer;

@@ -66,7 +66,6 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 			}
 			catch (err) {
 				setLoading(false);
-				console.log(err.message);
 				setError({
 					isError: true,
 					errorMessage: err.message

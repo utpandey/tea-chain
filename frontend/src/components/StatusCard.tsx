@@ -8,6 +8,7 @@ interface IStatusCard {
 }
 
 const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
+  console.log(data)
   return (
     <>
       {(() => {

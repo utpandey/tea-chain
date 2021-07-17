@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withRouter, useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserStateReducer, LOGOUT } from "src/store/auth";
+import { EmptyBatch} from "../store/batch"
 
 // const svgVariants = {
 // 	hidden: { rotate: -180 },
@@ -37,6 +38,7 @@ const Header = () => {
 
   const logout = () => {
     dispatch(LOGOUT());
+    dispatch(EmptyBatch(null));
   };
 
   return (

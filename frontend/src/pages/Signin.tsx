@@ -173,12 +173,12 @@ const Signin = () => {
 					/>
 				</div>
 
-				<p className="signup__cont__left__msg">
+				<div className="signup__cont__left__msg">
 					Forgot Password?{' '}
-					<div onClick={handleForgotPassword} className="signup__cont__left__msg__link">
+					<p onClick={handleForgotPassword} className="signup__cont__left__msg__link">
 						Click here
-					</div>
-				</p>
+					</p>
+				</div>
 
 				<button onClick={handleSignin} className="signup__cont__left__submitBtn">
 					Continue <span>&#10148;</span>

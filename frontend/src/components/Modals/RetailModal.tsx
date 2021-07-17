@@ -12,11 +12,12 @@ interface IModalProps {
 	fetchTeachain: any;
 	loading: boolean;
 	setLoading: any;
+	setError: any;
 }
 
 const teachainAddress = config.contractAddress || '';
 
-export const RetailModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain,loading, setLoading }) => {
+export const RetailModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain,loading, setLoading, setError }) => {
 	const [ batchId, setBatchId ] = useState('');
 	const [ address, setAddress ] = useState('');
 	const [ name, setName ] = useState('');
@@ -33,7 +34,8 @@ export const RetailModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 		console.log(newDate.getTime())
 		setLoading(true);
 		if (typeof window.ethereum !== 'undefined') {
-			await requestAccount();
+			try {
+				await requestAccount();
 			const provider = new ethers.providers.Web3Provider(window.ethereum);
 			const signer = provider.getSigner();
 			const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
@@ -53,6 +55,14 @@ export const RetailModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 				setModal(false);
 			});
 			console.log(transaction);
+			}
+			catch (err) {
+				setLoading(false);
+				setError({
+					isError: true,
+					errorMessage: err.message
+				});
+			}
 		}
 	}
 
@@ -156,13 +166,16 @@ export const RetailModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 										placeholder="Retailer Name"
 									/>
 								</div>
-								<div className="modal__cont__inputCont">
+								<div className="date">
+									<h1 className="modal__cont__inputCont__label">
+										Receiving Date
+									</h1>
 									<input
 										type="date"
 										name="date"
 										onChange={(e) => setDate(e.target.value)}
 										id="date"
-										className="modal__cont__inputCont__input"
+										className=""
 										required={true}
 										placeholder="Receiving Date"
 									/>

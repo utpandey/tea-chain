@@ -12,11 +12,12 @@ interface IModalProps {
 	fetchTeachain: any;
 	loading: boolean;
 	setLoading: any;
+	setError: any;
 }
 
 const teachainAddress = config.contractAddress || '';
 
-export const ManufactureModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain, loading, setLoading  }) => {
+export const ManufactureModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain, loading, setLoading, setError }) => {
 	const [ batchId, setBatchId ] = useState('');
 	const [ address, setAddress ] = useState('');
 	const [ name, setName ] = useState('');
@@ -36,27 +37,36 @@ export const ManufactureModal: FC<IModalProps> = ({ showModal, setModal, fetchTe
 		console.log(newDate.getTime())
 		setLoading(true);
 		if (typeof window.ethereum !== 'undefined') {
-			await requestAccount();
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const signer = provider.getSigner();
-			const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
-			const transaction = await contract.functions.createBatch();
-			await transaction.wait();
-			contract.on('BatchCreated', async (res) => {
-				const transactionTwo = await contract.functions.updateManufcturerEntry(
-					batchId,
-					address,
-					name,
-					teaType,
-					newDate.getTime(),
-					parseInt(duration,10)
-				);
-				await transactionTwo.wait();
-				fetchTeachain()
+			try {
+				await requestAccount();
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner();
+				const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
+				const transaction = await contract.functions.createBatch();
+				await transaction.wait();
+				contract.on('BatchCreated', async (res) => {
+					const transactionTwo = await contract.functions.updateManufcturerEntry(
+						batchId,
+						address,
+						name,
+						teaType,
+						newDate.getTime(),
+						parseInt(duration,10)
+					);
+					await transactionTwo.wait();
+					fetchTeachain()
+					setLoading(false);
+					setModal(false)
+				});
+				console.log(transaction);
+			}
+			catch (err) {
 				setLoading(false);
-				setModal(false)
-			});
-			console.log(transaction);
+				setError({
+					isError: true,
+					errorMessage: err.message
+				});
+			}
 		}
 	}
 
@@ -171,13 +181,16 @@ export const ManufactureModal: FC<IModalProps> = ({ showModal, setModal, fetchTe
 										placeholder="Tea Type"
 									/>
 								</div>
-								<div className="modal__cont__inputCont">
+								<div className="date">
+									<h1 className="modal__cont__inputCont__label">
+										Receiving Date
+									</h1>
 									<input
 										type="date"
 										name="date"
-											onChange={(e) => setDate(e.target.value)}
+										onChange={(e) => setDate(e.target.value)}
 										id="date"
-										className="modal__cont__inputCont__input"
+										className=""
 										required={true}
 										placeholder="Receiving Date"
 									/>

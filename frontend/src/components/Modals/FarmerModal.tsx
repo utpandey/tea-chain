@@ -12,11 +12,12 @@ interface IModalProps {
 	fetchTeachain: any;
 	loading: boolean;
 	setLoading: any;
+	setError: any;
 }
 
 const teachainAddress = config.contractAddress || '';
 
-export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain, loading, setLoading }) => {
+export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachain, loading, setLoading, setError }) => {
 	const [ address, setAddress ] = useState('');
 	const [ name, setName ] = useState('');
 	const [ teaSpecies, setTeaSpecies ] = useState('');
@@ -35,33 +36,44 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 		console.log(newDate.getTime())
 		setLoading(true);
 		if (typeof window.ethereum !== 'undefined') {
-			await requestAccount();
-			const provider = new ethers.providers.Web3Provider(window.ethereum);
-			const signer = provider.getSigner();
-			console.log(teachainAddress)
-			const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
-			const transaction = await contract.functions.createBatch();
-			await transaction.wait();
-			contract.on('BatchCreated', async (res) => {
-				const num = res.toNumber();
-				const transactionTwo = await contract.functions.updateFarmerEntry(
-					num,
-					address,
-					name,
-					teaSpecies,
-					location,
-					newDate.getTime(),
-					// Math.round(new Date().getTime() / 10000),
-					flush
-				);
-				await transactionTwo.wait();
-				fetchTeachain()
+			try {
+				await requestAccount();
+				const provider = new ethers.providers.Web3Provider(window.ethereum);
+				const signer = provider.getSigner();
+				console.log(teachainAddress)
+				const contract = new ethers.Contract(teachainAddress, Teachain.abi, signer);
+				const transaction = await contract.functions.createBatch();
+				await transaction.wait();
+				contract.on('BatchCreated', async (res) => {
+					const num = res.toNumber();
+					const transactionTwo = await contract.functions.updateFarmerEntry(
+						num,
+						address,
+						name,
+						teaSpecies,
+						location,
+						newDate.getTime(),
+						// Math.round(new Date().getTime() / 10000),
+						flush
+					);
+					await transactionTwo.wait();
+					fetchTeachain()
+					setLoading(false);
+					setModal(false)
+				});
+				console.log('before transaction // MoDal')
+				console.log(transaction);
+			}
+			catch (err) {
 				setLoading(false);
-				setModal(false)
-			});
-			console.log('before transaction // MoDal')
-			console.log(transaction);
-		}
+				console.log(err.message);
+				setError({
+					isError: true,
+					errorMessage: err.message
+				});
+			}
+			}
+		
 	}
 
 	return (
@@ -186,13 +198,16 @@ export const FarmerModal: FC<IModalProps> = ({ showModal, setModal, fetchTeachai
 										placeholder="Tea Location"
 									/>
 								</div>
-								<div className="modal__cont__inputCont">
+								<div className="date">
+									<h1 className="modal__cont__inputCont__label">
+										Harvesting Date
+									</h1>
 									<input
 										type="date"
 										name="date"
-											onChange={(e) => setDate(e.target.value)}
+										onChange={(e) => setDate(e.target.value)}
 										id="date"
-										className="modal__cont__inputCont__input"
+										className=""
 										required={true}
 										placeholder="Harvesting Date"
 									/>

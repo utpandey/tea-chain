@@ -9,7 +9,8 @@ interface IModalProps {
   setModal: any;
   fetchTeachain: any;
   loading: boolean;
-	setLoading: any;
+  setLoading: any;
+  setError: any;
 }
 
 const teachainAddress = config.contractAddress || '';
@@ -19,7 +20,8 @@ export const DistributerModal: FC<IModalProps> = ({
   setModal,
   fetchTeachain,
   loading,
-  setLoading
+  setLoading,
+  setError
 }) => {
   const [batchId, setBatchId] = useState("");
   const [address, setAddress] = useState("");
@@ -39,7 +41,8 @@ export const DistributerModal: FC<IModalProps> = ({
 		console.log(newDate.getTime())
 		setLoading(true);
     if (typeof window.ethereum !== "undefined") {
-      await requestAccount();
+      try {
+        await requestAccount();
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(
@@ -63,6 +66,14 @@ export const DistributerModal: FC<IModalProps> = ({
         setModal(false);
       });
       console.log(transaction);
+      }
+      catch (err) {
+        setLoading(false);
+				setError({
+					isError: true,
+					errorMessage: err.message
+				});
+      }
     }
   }
 
@@ -166,17 +177,20 @@ export const DistributerModal: FC<IModalProps> = ({
                     placeholder="Distributer Name"
                   />
                 </div>
-                <div className="modal__cont__inputCont">
-                  <input
-                    type="date"
-                    name="date"
-                    onChange={(e) => setDate(e.target.value)}
-                    id="date"
-                    className="modal__cont__inputCont__input"
-                    required={true}
-                    placeholder="Receiving Date"
-                  />
-                </div>
+                <div className="date">
+									<h1 className="modal__cont__inputCont__label">
+										Receiving Date
+									</h1>
+									<input
+										type="date"
+										name="date"
+										onChange={(e) => setDate(e.target.value)}
+										id="date"
+										className=""
+										required={true}
+										placeholder="Receiving Date"
+									/>
+								</div>
                 <div className="modal__cont__inputCont">
                   <input
                     type="text"

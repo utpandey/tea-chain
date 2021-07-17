@@ -70,7 +70,7 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                   </h1>
                   <h1 className="status__cont__card__content--body">
                     Withering Duration :{" "}
-                    <span>{(new Date(parseInt(data[5].hex, 16)).toISOString()).slice(0,10)}</span>
+                    <span>{(parseInt(data[5].hex, 16))}</span>
                   </h1>
                   <div className="status__cont__card__content--role">
                     Manufacturer
@@ -140,7 +140,7 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                     Receiving Date: <span>{(new Date(parseInt(data[3].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
-                    Storage Temp: <span>{data[4]}</span>
+                    Storage Temp: <span>{data[4]}</span>°C
                   </h1>
                   <div className="status__cont__card__content--role">
                     Distributor

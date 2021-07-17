@@ -24,6 +24,7 @@ import config from "../config";
 
 import code from "../assets/code.png";
 import download from "../assets/download.png";
+import Snackbar from "src/components/Snackbar";
 
 declare global {
   /* tslint:disable */
@@ -41,12 +42,22 @@ const Admin: FC = () => {
   const userRole = useSelector(getUserTypeReducer);
   const [showModal, setModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
-  const elementsRef = useRef([]);
+  const [error, setError] = useState({
+		isError: false,
+		errorMessage: ''
+	})
   const dispatch = useDispatch();
   // console.log(userRole === 'Manufacturer')
   useEffect(() => {
     fetchTeachain();
   }, []);
+
+  const clearError =()=> {
+		setError({
+			isError: false,
+			errorMessage: '',
+		})
+	}
 
   const downloadQrCode = (
     e: MouseEvent<HTMLImageElement, any>,
@@ -395,6 +406,7 @@ const Admin: FC = () => {
           fetchTeachain={fetchTeachain}
           loading={loading}
           setLoading={setLoading}
+          setError={setError}
         />
       )}
       {userRole === "Manufacturer" && (
@@ -404,6 +416,7 @@ const Admin: FC = () => {
           fetchTeachain={fetchTeachain}
            loading={loading}
           setLoading={setLoading}
+           setError={setError}
         />
       )}
       {userRole === "Wholesaler" && (
@@ -413,6 +426,7 @@ const Admin: FC = () => {
           fetchTeachain={fetchTeachain}
            loading={loading}
           setLoading={setLoading}
+           setError={setError}
         />
       )}
       {userRole === "Distributer" && (
@@ -422,6 +436,7 @@ const Admin: FC = () => {
           fetchTeachain={fetchTeachain}
            loading={loading}
           setLoading={setLoading}
+           setError={setError}
         />
       )}
       {userRole === "Retailer" && (
@@ -431,9 +446,11 @@ const Admin: FC = () => {
           fetchTeachain={fetchTeachain}
            loading={loading}
           setLoading={setLoading}
+           setError={setError}
         />
       )}
       {loading ? <LoaderModal /> : null}
+      {error.isError && <Snackbar status="error" message={error.errorMessage} clearError={clearError} />}
       {/* <button onClick={fetchTeachain}>Click</button>
 			<button onClick={updateManufcturerEntry}>Click</button>
 			<button onClick={updateWholesalerEntry}>Click</button> */}
@@ -442,41 +459,3 @@ const Admin: FC = () => {
 };
 
 export default Admin;
-
-// console.log(obj[i][obj[i].length-1]) to get isUpdate
-
-// return (
-//   <>
-//     <div className="table-row" key={index}>
-//       {/* <div className="table-data">{id++}</div> */}
-//       {/* <div className="table-data">{data.email}</div>
-//       <div className="table-data">{data.firstName}</div>
-//       <div className="table-data">{data.lastName}</div>
-//       <div className="table-data">{data.gender}</div>
-//       <div className="table-data">{data.phone}</div>
-//       <div className="table-data">{data.purpose}</div>
-//       <div className="table-data">{data.address}</div> */}
-//     </div>
-//   </>
-// );
-
-{
-  /* {visitors.map((data, index) => (
-                <div className="table-row" key={index}>
-                  <div className="table-data">{id++}</div>
-                  <div className="table-data">{data.email}</div>
-                  <div className="table-data">{data.firstName}</div>
-                  <div className="table-data">{data.lastName}</div>
-                  <div className="table-data">{data.gender}</div>
-                  <div className="table-data">{data.phone}</div>
-                  <div className="table-data">{data.purpose}</div>
-                  <div className="table-data">{data.address}</div>
-                  <div className="table-data">
-                    {data.vaccinated ? "Done" : "Not Yet"}
-                  </div>
-                  <div className="table-data">
-                    {data.inTime.hr}:{data.inTime.min}
-                  </div>
-                </div>
-              ))} */
-}

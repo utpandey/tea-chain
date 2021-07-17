@@ -1017,6 +1017,10 @@ html {
   outline: 0;
   box-shadow: 0 2px 6px -8px rgba(0, 0, 0, 0.45); }
 
+.modal__cont__inputCont__label {
+  color: grey;
+  font-size: 2rem; }
+
 .modal__cont__submitBtn {
   border-radius: 1rem;
   margin: 2rem 0 2rem 0;
@@ -1037,6 +1041,12 @@ html {
 
 .modal__cont__submitBtn:hover {
   opacity: 0.90; }
+
+.date {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; }
 
 :root {
   --secondary: #33406f; }

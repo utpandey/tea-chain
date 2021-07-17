@@ -8,12 +8,6 @@ interface IStatusCard {
 }
 
 const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
-  // console.log(data);
-  // console.log(index);
-  // data[data.length - 1] = false;
-  const batchId = parseInt(data[4], 16);
-  console.log(batchId);
-  console.log(data[data.length - 1]);
   return (
     <>
       {(() => {
@@ -143,7 +137,7 @@ const StatusCard: React.FC<IStatusCard> = ({ data, index }) => {
                     Distributor name: <span>{data[2]}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
-                    Receiving Date: <span>{(new Date(parseInt(data[4].hex, 16)).toISOString()).slice(0,10)}</span>
+                    Receiving Date: <span>{(new Date(parseInt(data[3].hex, 16)).toISOString()).slice(0,10)}</span>
                   </h1>
                   <h1 className="status__cont__card__content--body">
                     Storage Temp: <span>{data[4]}</span>

@@ -1,5 +1,4 @@
-import React, { FC } from "react";
-import { Button, Card, FormControl, Table } from "react-bootstrap";
+import { FC } from "react";
 import { useDispatch } from "react-redux";
 
 import { AddBatch } from "src/store/batch";
@@ -173,24 +172,3 @@ const Batches: FC<IBatchesProps> = ({ data }) => {
 };
 
 export default Batches;
-
-interface IBatchComponentProps {
-  batchData: any;
-  bool: boolean;
-}
-
-const BatchComponent: FC<IBatchComponentProps> = ({ batchData, bool }) => {
-  return (
-    <div className="box2">
-      {batchData[batchData.length - 1] === false ? (
-        bool ? (
-          <button className="box2__title3">Processing</button>
-        ) : (
-          <button className="box2__title2">Not Available</button>
-        )
-      ) : (
-        <button className="box2__title1">Completed</button>
-      )}
-    </div>
-  );
-};

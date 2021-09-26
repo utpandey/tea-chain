@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:8080/",
-  responseType: "json"
+  baseURL: "https://tea-chain-backend.herokuapp.com/",
+  responseType: "json",
 });

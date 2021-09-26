@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, MouseEvent, useRef } from "react";
+import { FC, useState, useEffect, MouseEvent } from "react";
 import { ethers } from "ethers";
 import { useSelector, useDispatch } from "react-redux";
 import QRcode from "qrcode.react";
@@ -19,11 +19,11 @@ import { getUserTypeReducer } from "../store/auth";
 
 import user from "../assets/user.svg";
 import documentImg from "../assets/document.svg";
-import Batches from "src/components/Batches";
+// import Batches from "src/components/Batches";
 import config from "../config";
 
 import code from "../assets/code.png";
-import download from "../assets/download.png";
+// import download from "../assets/download.png";
 import Snackbar from "src/components/Snackbar";
 
 declare global {
@@ -43,21 +43,21 @@ const Admin: FC = () => {
   const [showModal, setModal] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({
-		isError: false,
-		errorMessage: ''
-	})
+    isError: false,
+    errorMessage: "",
+  });
   const dispatch = useDispatch();
   // console.log(userRole === 'Manufacturer')
   useEffect(() => {
     fetchTeachain();
   }, []);
 
-  const clearError =()=> {
-		setError({
-			isError: false,
-			errorMessage: '',
-		})
-	}
+  const clearError = () => {
+    setError({
+      isError: false,
+      errorMessage: "",
+    });
+  };
 
   const downloadQrCode = (
     e: MouseEvent<HTMLImageElement, any>,
@@ -122,86 +122,6 @@ const Admin: FC = () => {
       } catch (err) {
         console.log("Error: ", err);
       }
-    }
-  }
-  async function setTeachain() {
-    // if (!teachain) return
-    if (typeof window.ethereum !== "undefined") {
-      await requestAccount();
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        teachainAddress,
-        Teachain.abi,
-        signer
-      );
-      const transaction = await contract.functions.createBatch();
-      await transaction.wait();
-      contract.on("BatchCreated", async (res) => {
-        const num = res.toNumber();
-        const transactionTwo = await contract.functions.updateFarmerEntry(
-          num,
-          "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266",
-          "Jack",
-          "Camellia sinensis",
-          "Darjeeling",
-          Math.round(new Date().getTime() / 10000),
-          1
-        );
-        await transactionTwo.wait();
-      });
-      console.log(transaction);
-      // fetchTeachain()
-    }
-  }
-
-  async function updateManufcturerEntry() {
-    // if (!teachain) return
-    if (typeof window.ethereum !== "undefined") {
-      await requestAccount();
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        teachainAddress,
-        Teachain.abi,
-        signer
-      );
-      // const transaction = await contract.functions.createBatch()
-      const transactionTwo = await contract.functions.updateManufcturerEntry(
-        596,
-        "0x70997970C51812dc3A010C7d01b50e0d17dc79C8",
-        "Jill",
-        "Green Tea",
-        Math.round(new Date().getTime()),
-        "16"
-      );
-      await transactionTwo.wait();
-      console.log(transactionTwo);
-      // fetchTeachain()
-    }
-  }
-
-  async function updateWholesalerEntry() {
-    // if (!teachain) return
-    if (typeof window.ethereum !== "undefined") {
-      await requestAccount();
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        teachainAddress,
-        Teachain.abi,
-        signer
-      );
-      // const transaction = await contract.functions.createBatch()
-      const transactionTwo = await contract.functions.updateWholesalerEntry(
-        596,
-        "0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC",
-        "Jerry",
-        Math.round(new Date().getTime() / 10000)
-      );
-      await transactionTwo.wait();
-      console.log(transactionTwo);
-      // fetchTeachain()
     }
   }
 
@@ -414,9 +334,9 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
-           loading={loading}
+          loading={loading}
           setLoading={setLoading}
-           setError={setError}
+          setError={setError}
         />
       )}
       {userRole === "Wholesaler" && (
@@ -424,9 +344,9 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
-           loading={loading}
+          loading={loading}
           setLoading={setLoading}
-           setError={setError}
+          setError={setError}
         />
       )}
       {userRole === "Distributer" && (
@@ -434,9 +354,9 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
-           loading={loading}
+          loading={loading}
           setLoading={setLoading}
-           setError={setError}
+          setError={setError}
         />
       )}
       {userRole === "Retailer" && (
@@ -444,13 +364,19 @@ const Admin: FC = () => {
           showModal={showModal}
           setModal={setModal}
           fetchTeachain={fetchTeachain}
-           loading={loading}
+          loading={loading}
           setLoading={setLoading}
-           setError={setError}
+          setError={setError}
         />
       )}
       {loading ? <LoaderModal /> : null}
-      {error.isError && <Snackbar status="error" message={error.errorMessage} clearError={clearError} />}
+      {error.isError && (
+        <Snackbar
+          status="error"
+          message={error.errorMessage}
+          clearError={clearError}
+        />
+      )}
       {/* <button onClick={fetchTeachain}>Click</button>
 			<button onClick={updateManufcturerEntry}>Click</button>
 			<button onClick={updateWholesalerEntry}>Click</button> */}

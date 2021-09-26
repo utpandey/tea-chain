@@ -8,12 +8,12 @@ interface IModalProps {
   showModal: any;
   setModal: any;
   fetchTeachain: any;
-  loading: boolean;
+  loading?: boolean;
   setLoading: any;
   setError: any;
 }
 
-const teachainAddress = config.contractAddress || '';
+const teachainAddress = config.contractAddress || "";
 
 export const DistributerModal: FC<IModalProps> = ({
   showModal,
@@ -21,7 +21,7 @@ export const DistributerModal: FC<IModalProps> = ({
   fetchTeachain,
   loading,
   setLoading,
-  setError
+  setError,
 }) => {
   const [batchId, setBatchId] = useState("");
   const [address, setAddress] = useState("");
@@ -38,41 +38,40 @@ export const DistributerModal: FC<IModalProps> = ({
     // if (!teachain) return
     event.preventDefault();
     const newDate = new Date(date);
-		console.log(newDate.getTime())
-		setLoading(true);
+    console.log(newDate.getTime());
+    setLoading(true);
     if (typeof window.ethereum !== "undefined") {
       try {
         await requestAccount();
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.Contract(
-        teachainAddress,
-        Teachain.abi,
-        signer
-      );
-      const transaction = await contract.functions.createBatch();
-      await transaction.wait();
-      contract.on("BatchCreated", async (res) => {
-        const transactionTwo = await contract.functions.updateDistributerEntry(
-          batchId,
-          address,
-          name,
-          newDate.getTime(),
-          temp
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const contract = new ethers.Contract(
+          teachainAddress,
+          Teachain.abi,
+          signer
         );
-        await transactionTwo.wait();
-        fetchTeachain();
+        const transaction = await contract.functions.createBatch();
+        await transaction.wait();
+        contract.on("BatchCreated", async (res) => {
+          const transactionTwo = await contract.functions.updateDistributerEntry(
+            batchId,
+            address,
+            name,
+            newDate.getTime(),
+            temp
+          );
+          await transactionTwo.wait();
+          fetchTeachain();
+          setLoading(false);
+          setModal(false);
+        });
+        console.log(transaction);
+      } catch (err: any) {
         setLoading(false);
-        setModal(false);
-      });
-      console.log(transaction);
-      }
-      catch (err) {
-        setLoading(false);
-				setError({
-					isError: true,
-					errorMessage: err.message
-				});
+        setError({
+          isError: true,
+          errorMessage: err.message,
+        });
       }
     }
   }
@@ -178,19 +177,19 @@ export const DistributerModal: FC<IModalProps> = ({
                   />
                 </div>
                 <div className="date">
-									<h1 className="modal__cont__inputCont__label">
-										Receiving Date
-									</h1>
-									<input
-										type="date"
-										name="date"
-										onChange={(e) => setDate(e.target.value)}
-										id="date"
-										className=""
-										required={true}
-										placeholder="Receiving Date"
-									/>
-								</div>
+                  <h1 className="modal__cont__inputCont__label">
+                    Receiving Date
+                  </h1>
+                  <input
+                    type="date"
+                    name="date"
+                    onChange={(e) => setDate(e.target.value)}
+                    id="date"
+                    className=""
+                    required={true}
+                    placeholder="Receiving Date"
+                  />
+                </div>
                 <div className="modal__cont__inputCont">
                   <input
                     type="text"

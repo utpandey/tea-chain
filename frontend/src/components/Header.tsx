@@ -77,7 +77,7 @@ const Header = () => {
       </Link>
       {isAuthenticated ? (
         <div className="header__cont__title" onClick={logout}>
-          <h1 className="header__cont__title__text">Logout</h1>
+          <h1 className="header__cont__title__text"style={{marginLeft: 'auto', marginRight: '5rem'}}>Logout</h1>
         </div>
       ) : (
         <motion.div className="header__cont__title">
